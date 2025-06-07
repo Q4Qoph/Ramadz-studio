@@ -1,4 +1,4 @@
-// tailwind.config.ts
+// tailwind.config.ts - Updated with Logo Colors
 import type { Config } from "tailwindcss";
 
 const config: Config = {
@@ -51,12 +51,19 @@ const config: Config = {
           '4': 'hsl(var(--chart-4))',
           '5': 'hsl(var(--chart-5))'
         },
-        // RMDZ Studios Brand Colors
-        charcoal: '#1A1A1A',
-        beige: '#FDF7F0',
-        gold: {
-          light: '#EFDCA3',
-          DEFAULT: '#D1A73C',
+        // RMDZ Studios Brand Colors (Based on Logo)
+        charcoal: '#2D2D2D',        // Dark gray from logo
+        slate: '#6B7280',           // Medium gray from logo
+        cream: '#FEF7F0',           // Light cream background
+        orange: {
+          light: '#F97316',         // Bright orange
+          DEFAULT: '#EA580C',       // Main orange from logo
+          dark: '#C2410C',          // Darker orange
+        },
+        rust: {
+          light: '#DC6803',         // Light rust
+          DEFAULT: '#B45309',       // Main rust color
+          dark: '#92400E',          // Dark rust
         }
       },
       borderRadius: {
@@ -81,7 +88,7 @@ const config: Config = {
             height: '0'
           }
         },
-        // Additional animations for RMDZ Studios
+        // RMDZ Studios custom animations
         "gradient-x": {
           "0%, 100%": {
             "background-size": "200% 200%",
@@ -91,16 +98,26 @@ const config: Config = {
             "background-size": "200% 200%",
             "background-position": "right center"
           }
+        },
+        "float": {
+          "0%, 100%": { transform: "translateY(0px)" },
+          "50%": { transform: "translateY(-10px)" }
         }
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
         "gradient-x": "gradient-x 15s ease infinite",
+        "float": "float 3s ease-in-out infinite",
       },
       fontFamily: {
         'serif': ['Playfair Display', 'serif'],
         'sans': ['Inter', 'system-ui', 'sans-serif'],
+      },
+      backgroundImage: {
+        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+        'gradient-brand': 'linear-gradient(135deg, #EA580C 0%, #DC6803 50%, #B45309 100%)',
+        'gradient-soft': 'linear-gradient(135deg, #FEF7F0 0%, #FFFFFF 100%)',
       }
     }
   },

@@ -1,7 +1,9 @@
+// src/components/layout/header.tsx - Fixed with proper logo sizing
 "use client"
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
 import { Button } from '@/components/ui/button'
@@ -37,20 +39,23 @@ export default function Header() {
       transition={{ duration: 0.6 }}
     >
       <nav className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 sm:h-20">
-          {/* Logo */}
+        <div className="flex items-center justify-between h-8 sm:h-16">
+          {/* Logo - Fixed sizing */}
           <motion.div
             className="flex-shrink-0"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            <Link href="/" className="flex items-center space-x-2">
-              <div className="w-10 h-10 bg-gradient-brand rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-xl">R</span>
+            <Link href="/" className="flex items-center">
+              <div className="relative w-24 h-32 sm:w-28 sm:h-32">
+                <Image
+                  src="/logo.png"
+                  alt="RMDZ Studios Logo"
+                  fill
+                  className="object-contain"
+                  priority
+                />
               </div>
-              <span className="font-serif font-bold text-xl text-charcoal">
-                RMDZ Studios
-              </span>
             </Link>
           </motion.div>
 
@@ -66,7 +71,7 @@ export default function Header() {
                 >
                   <Link
                     href={item.href}
-                    className="text-charcoal hover:text-gold transition-colors duration-300 font-medium relative group"
+                    className="text-charcoal hover:text-orange transition-colors duration-300 font-medium relative group"
                   >
                     {item.name}
                     <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-brand transition-all duration-300 group-hover:w-full"></span>
@@ -78,7 +83,7 @@ export default function Header() {
 
           {/* CTA Button */}
           <div className="hidden md:block">
-            <Button className="bg-gradient-brand hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-300">
+            <Button className="bg-gradient-brand hover:shadow-brand transform hover:-translate-y-0.5 transition-all duration-300 text-white">
               Get Started
             </Button>
           </div>
@@ -87,7 +92,7 @@ export default function Header() {
           <div className="md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-charcoal hover:text-gold focus:outline-none focus:text-gold transition-colors duration-300"
+              className="text-charcoal hover:text-orange focus:outline-none focus:text-orange transition-colors duration-300"
             >
               {isOpen ? (
                 <X className="h-6 w-6" />
@@ -108,7 +113,7 @@ export default function Header() {
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3 }}
             >
-              <div className="px-2 pt-2 pb-3 space-y-1 bg-white/95 backdrop-blur-lg rounded-lg mt-2 shadow-lg">
+              <div className="px-2 pt-2 pb-3 space-y-1 bg-white/95 backdrop-blur-lg rounded-lg mt-2 shadow-brand">
                 {navItems.map((item, index) => (
                   <motion.div
                     key={item.name}
@@ -118,7 +123,7 @@ export default function Header() {
                   >
                     <Link
                       href={item.href}
-                      className="text-charcoal hover:text-gold hover:bg-beige block px-3 py-2 rounded-md text-base font-medium transition-all duration-300"
+                      className="text-charcoal hover:text-orange hover:bg-cream block px-3 py-2 rounded-md text-base font-medium transition-all duration-300"
                       onClick={() => setIsOpen(false)}
                     >
                       {item.name}
@@ -126,7 +131,7 @@ export default function Header() {
                   </motion.div>
                 ))}
                 <div className="pt-4 pb-2">
-                  <Button className="w-full bg-gradient-brand">
+                  <Button className="w-full bg-gradient-brand text-white">
                     Get Started
                   </Button>
                 </div>
