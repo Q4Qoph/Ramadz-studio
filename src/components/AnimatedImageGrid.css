@@ -1,0 +1,50 @@
+:root {
+  --image-1: url("/background1.jpg");
+  --image-2: url("/background2.jpg");
+  --image-3: url("/background3.jpg");
+}
+
+.animated-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+  gap: 0.5rem;
+  padding: 0.5rem;
+}
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+}
+.item {
+  width: 100%;
+  border-radius: 0.5rem;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* Column 1 */
+.column-1 .item-1 { flex: 1; animation: background 5s 150ms infinite ease-in-out; }
+.column-1 .item-2 { flex: 2; animation: background 5s 274ms infinite ease-in-out; }
+.column-1 .item-3 { flex: 1; animation: background 5s 350ms infinite ease-in-out; }
+
+/* Column 2 */
+.column-2 .item-1 { flex: 1; animation: background 5s 150ms infinite ease-in-out; }
+.column-2 .item-2 { flex: 3; animation: background 5s 274ms infinite ease-in-out; }
+.column-2 .item-3 { flex: 1; animation: background 5s 350ms infinite ease-in-out; }
+
+/* Column 3 */
+.column-3 .item-1 { flex: 2; animation: background 5s 280ms infinite ease-in-out; }
+.column-3 .item-2 { flex: 2; animation: background 5s 95ms infinite ease-in-out; }
+.column-3 .item-3 { flex: 1; animation: background 5s 350ms infinite ease-in-out; }
+
+@keyframes background {
+  0%, 30%   { background-image: var(--image-1); }
+  33%, 63%  { background-image: var(--image-2); }
+  66%, 96%  { background-image: var(--image-3); }
+  100%      { background-image: var(--image-1); }
+}
