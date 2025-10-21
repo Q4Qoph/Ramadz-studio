@@ -49,7 +49,7 @@ export default function Header() {
             <Link href="/" className="flex items-center">
               <div className="relative w-24 h-32 sm:w-28 sm:h-32">
                 <Image
-                  src="/logo.png"
+                  src="/logo1.png"
                   alt="RMDZ Studios Logo"
                   fill
                   className="object-contain"
