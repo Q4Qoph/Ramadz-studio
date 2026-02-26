@@ -1,27 +1,15 @@
 "use client"
 
 import { motion } from 'framer-motion'
-import { ArrowRight, Target, Users, Lightbulb } from 'lucide-react'
+import { ArrowRight, CheckCircle } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { Card, CardContent } from '@/components/ui/card'
 import Link from 'next/link'
 
-const values = [
-  {
-    icon: Target,
-    title: "Purpose-Driven",
-    description: "Every piece of content we create has intention and impact behind it."
-  },
-  {
-    icon: Users,
-    title: "Collaborative",
-    description: "We work hand-in-hand with our clients to bring their vision to life."
-  },
-  {
-    icon: Lightbulb,
-    title: "Innovative",
-    description: "We stay ahead of trends and push creative boundaries in everything we do."
-  }
+const clientTypes = [
+  ['Coaches', 'Counselors'],
+  ['Pastors & ministry leaders', 'Podcasters'],
+  ['Real estate brands', 'SMEs & service providers'],
+  ['Thought leaders', ''],
 ]
 
 export default function AboutPreview() {
@@ -37,13 +25,13 @@ export default function AboutPreview() {
             viewport={{ once: true }}
           >
             <motion.div
-              className="inline-flex items-center space-x-2 bg-beige rounded-full px-4 py-2 mb-6"
+              className="inline-flex items-center space-x-2 bg-cream rounded-full px-4 py-2 mb-6"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
               viewport={{ once: true }}
             >
-              <span className="text-sm font-medium text-charcoal">About RMDZ Studios</span>
+              <span className="text-sm font-medium text-charcoal">Who We Are</span>
             </motion.div>
 
             <motion.h2
@@ -53,20 +41,21 @@ export default function AboutPreview() {
               transition={{ duration: 0.8, delay: 0.4 }}
               viewport={{ once: true }}
             >
-              Content is Not Just Media,{' '}
-              <span className="text-gradient">It's Movement</span>
+              Strategic Content.{' '}
+              <span className="text-gradient">Real Growth.</span>{' '}
+              Measurable Income.
             </motion.h2>
 
             <motion.p
-              className="text-lg text-gray-600 mb-8 leading-relaxed"
+              className="text-lg text-gray-600 mb-6 leading-relaxed"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.6 }}
               viewport={{ once: true }}
             >
-              RMDZ Studios was born from a simple but radical belief: content is not just media, it is movement. 
-              What started as a one-mic, one-camera setup evolved into a full-fledged studio dedicated to shaping 
-              digital narratives with heart, strategy, and creative precision.
+              RMDZ Studios is a strategic content and digital growth studio that helps professionals
+              and service-based brands build authority, structure their messaging, and convert online
+              attention into measurable income.
             </motion.p>
 
             <motion.p
@@ -76,9 +65,9 @@ export default function AboutPreview() {
               transition={{ duration: 0.8, delay: 0.8 }}
               viewport={{ once: true }}
             >
-              We've grown with our clients—podcasts that began as passion projects are now platforms of influence. 
-              Social feeds that once blended in are now setting trends. Our story is a blend of hustle, humanity, 
-              and the relentless pursuit of creative clarity.
+              We've grown with our clients — podcasts that began as passion projects are now
+              platforms of influence. Social feeds that once blended in are now setting trends.
+              Our story is a blend of hustle, humanity, and the relentless pursuit of creative clarity.
             </motion.p>
 
             <motion.div
@@ -87,8 +76,8 @@ export default function AboutPreview() {
               transition={{ duration: 0.8, delay: 1.0 }}
               viewport={{ once: true }}
             >
-              <Button 
-                variant="outline" 
+              <Button
+                variant="outline"
                 className="border-2 border-charcoal text-charcoal hover:bg-charcoal hover:text-white transition-all duration-300"
                 asChild
               >
@@ -100,37 +89,45 @@ export default function AboutPreview() {
             </motion.div>
           </motion.div>
 
-          {/* Right Column - Values Cards */}
+          {/* Right Column - Client Types */}
           <motion.div
-            className="space-y-6"
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            {values.map((value, index) => (
-              <motion.div
-                key={value.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.4 + index * 0.2 }}
-                viewport={{ once: true }}
-              >
-                <Card className="hover:shadow-lg transition-all duration-300 border-0 bg-gradient-to-r from-beige/50 to-white">
-                  <CardContent className="p-6">
-                    <div className="flex items-start space-x-4">
-                      <div className="w-12 h-12 bg-gradient-brand rounded-lg flex items-center justify-center flex-shrink-0">
-                        <value.icon className="w-6 h-6 text-white" />
-                      </div>
-                      <div>
-                        <h3 className="text-xl font-semibold text-charcoal mb-2">{value.title}</h3>
-                        <p className="text-gray-600">{value.description}</p>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
+            <motion.h3
+              className="text-xl font-semibold text-charcoal mb-6"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              viewport={{ once: true }}
+            >
+              We specialize in serving:
+            </motion.h3>
+            <div className="grid grid-cols-2 gap-4">
+              {[
+                'Coaches',
+                'Counselors',
+                'Pastors & ministry leaders',
+                'Podcasters',
+                'Real estate brands',
+                'SMEs & service providers',
+                'Thought leaders building digital authority',
+              ].map((client, index) => (
+                <motion.div
+                  key={client}
+                  className="flex items-start space-x-3 bg-cream/60 rounded-xl p-4"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
+                  viewport={{ once: true }}
+                >
+                  <CheckCircle className="w-5 h-5 text-brand-orange flex-shrink-0 mt-0.5" />
+                  <span className="text-charcoal font-medium text-sm leading-snug">{client}</span>
+                </motion.div>
+              ))}
+            </div>
           </motion.div>
         </div>
       </div>

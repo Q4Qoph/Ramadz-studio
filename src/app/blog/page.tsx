@@ -7,7 +7,6 @@ import { Calendar, Clock, User, ArrowRight, Search, Filter } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Card, CardContent } from '@/components/ui/card'
-import { TextGenerateEffect } from '@/components/ui/text-generate-effect'
 
 const blogCategories = [
   { name: "All", value: "all" },
@@ -102,11 +101,15 @@ export default function BlogPage() {
   return (
     <div className="pt-20">
       {/* Hero Section */}
-      <section className="py-16 sm:py-24 bg-gradient-to-br from-beige via-white to-beige relative overflow-hidden">
-        <div className="absolute inset-0 w-full h-full">
-          <div className="absolute top-20 left-10 w-72 h-72 bg-gold/10 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-20 right-10 w-96 h-96 bg-gold-light/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
-        </div>
+      <section className="py-16 sm:py-24 bg-olive-dark relative overflow-hidden">
+        <div
+          className="circle-deco w-80 h-80 top-[-3rem] right-[-3rem]"
+          style={{ backgroundColor: '#B54808', opacity: 0.2 }}
+        />
+        <div
+          className="circle-deco w-48 h-48 bottom-[-2rem] left-[-2rem]"
+          style={{ backgroundColor: '#E5D9B6', opacity: 0.08 }}
+        />
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
@@ -116,26 +119,31 @@ export default function BlogPage() {
             transition={{ duration: 0.8 }}
           >
             <motion.div
-              className="inline-flex items-center space-x-2 bg-white/80 backdrop-blur-sm rounded-full px-4 py-2 mb-6 shadow-sm"
+              className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 mb-6"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              <span className="text-sm font-medium text-charcoal">Our Blog</span>
+              <span className="text-sm font-medium text-brand-cream">Our Blog</span>
             </motion.div>
 
-            <TextGenerateEffect
-              words="Insights, Tips & Creative Inspiration"
-              className="text-3xl sm:text-4xl lg:text-6xl font-serif font-bold text-charcoal mb-6"
-            />
+            <motion.h1
+              className="text-3xl sm:text-4xl lg:text-6xl font-serif font-bold text-brand-cream mb-6"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+            >
+              Insights, Tips &{' '}
+              <span className="text-brand-orange">Creative Inspiration</span>
+            </motion.h1>
 
             <motion.p
-              className="text-lg sm:text-xl text-gray-600 mb-8 leading-relaxed"
+              className="text-lg sm:text-xl text-brand-cream/70 mb-8 leading-relaxed"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.8 }}
             >
-              Stay updated with the latest trends, strategies, and insights from the world of content creation, 
+              Stay updated with the latest trends, strategies, and insights from the world of content creation,
               podcasting, and digital marketing.
             </motion.p>
           </motion.div>
@@ -178,8 +186,8 @@ export default function BlogPage() {
                   onClick={() => setSelectedCategory(category.value)}
                   className={`transition-all duration-300 ${
                     selectedCategory === category.value
-                      ? 'bg-gradient-brand text-white'
-                      : 'hover:border-gold hover:text-gold'
+                      ? 'bg-brand-orange text-white border-brand-orange'
+                      : 'hover:border-brand-orange hover:text-brand-orange'
                   }`}
                 >
                   {category.name}
@@ -208,10 +216,10 @@ export default function BlogPage() {
                     {/* Image */}
                     <div className="relative">
                       <div className="w-full h-48 bg-gradient-to-br from-gray-100 to-gray-200 overflow-hidden">
-                        <div className="w-full h-full bg-gradient-to-br from-gold/20 to-gold-light/30 flex items-center justify-center">
+                        <div className="w-full h-full bg-olive-dark flex items-center justify-center">
                           <div className="text-center">
                             <div className="w-12 h-12 bg-white/80 rounded-full flex items-center justify-center mx-auto mb-2">
-                              <Calendar className="w-6 h-6 text-gold" />
+                              <Calendar className="w-6 h-6 text-brand-orange" />
                             </div>
                             <p className="text-gray-600 font-medium text-sm">Blog Post</p>
                           </div>
@@ -219,7 +227,7 @@ export default function BlogPage() {
                       </div>
                       
                       {/* Category Badge */}
-                      <div className="absolute top-4 left-4 bg-gradient-brand text-white text-xs px-3 py-1 rounded-full">
+                      <div className="absolute top-4 left-4 bg-brand-orange text-white text-xs px-3 py-1 rounded-full">
                         {blogCategories.find(cat => cat.value === post.category)?.name || post.category}
                       </div>
                     </div>
@@ -242,7 +250,7 @@ export default function BlogPage() {
                       </div>
 
                       {/* Title */}
-                      <h3 className="text-xl font-semibold text-charcoal mb-3 group-hover:text-gold transition-colors duration-300 line-clamp-2">
+                      <h3 className="text-xl font-semibold text-charcoal mb-3 group-hover:text-brand-orange transition-colors duration-300 line-clamp-2">
                         {post.title}
                       </h3>
                       
@@ -256,7 +264,7 @@ export default function BlogPage() {
                         {post.tags.slice(0, 2).map((tag, tagIndex) => (
                           <span
                             key={tag}
-                            className="bg-beige text-charcoal text-xs px-2 py-1 rounded-full"
+                            className="bg-cream text-charcoal text-xs px-2 py-1 rounded-full"
                           >
                             {tag}
                           </span>
@@ -271,7 +279,7 @@ export default function BlogPage() {
                       {/* Read More */}
                       <Button 
                         variant="ghost" 
-                        className="text-gold hover:text-gold hover:bg-gold/10 p-0 h-auto font-semibold group/btn self-start"
+                        className="text-brand-orange hover:text-brand-orange hover:bg-brand-orange/10 p-0 h-auto font-semibold group/btn self-start"
                       >
                         Read More 
                         <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
@@ -299,7 +307,7 @@ export default function BlogPage() {
       </section>
 
       {/* Newsletter Section */}
-      <section className="py-16 sm:py-24 bg-charcoal text-white">
+      <section className="py-16 sm:py-24 bg-olive-dark text-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             className="max-w-2xl mx-auto text-center"
@@ -320,7 +328,7 @@ export default function BlogPage() {
                 placeholder="Enter your email"
                 className="bg-gray-800 border-gray-700 text-white placeholder-gray-400 flex-grow"
               />
-              <Button className="bg-gradient-brand hover:shadow-lg">
+              <Button className="bg-brand-orange hover:bg-brand-orange/90 hover:shadow-brand">
                 Subscribe
               </Button>
             </div>
@@ -332,7 +340,7 @@ export default function BlogPage() {
       </section>
 
       {/* Featured Topics */}
-      <section className="py-16 sm:py-24 bg-gradient-to-br from-beige/30 to-white">
+      <section className="py-16 sm:py-24 bg-cream/30">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             className="text-center mb-16"
@@ -365,7 +373,7 @@ export default function BlogPage() {
                     onClick={() => setSelectedCategory(category.value)}
                   >
                     <CardContent className="p-6 text-center">
-                      <div className="w-16 h-16 bg-gradient-brand rounded-full flex items-center justify-center mx-auto mb-4">
+                      <div className="w-16 h-16 bg-brand-orange rounded-full flex items-center justify-center mx-auto mb-4">
                         <Filter className="w-8 h-8 text-white" />
                       </div>
                       <h3 className="text-lg font-semibold text-charcoal mb-2">{category.name}</h3>

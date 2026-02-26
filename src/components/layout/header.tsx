@@ -1,4 +1,4 @@
-// src/components/layout/header.tsx - Fixed with proper logo sizing
+// src/components/layout/header.tsx - Updated with dark olive brand theme
 "use client"
 
 import { useState, useEffect } from 'react'
@@ -32,7 +32,9 @@ export default function Header() {
   return (
     <motion.header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? 'bg-white/90 backdrop-blur-lg shadow-lg' : 'bg-transparent'
+        scrolled
+          ? 'bg-olive-dark/95 backdrop-blur-lg shadow-lg'
+          : 'bg-transparent'
       }`}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
@@ -40,7 +42,7 @@ export default function Header() {
     >
       <nav className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-8 sm:h-16">
-          {/* Logo - Fixed sizing */}
+          {/* Logo */}
           <motion.div
             className="flex-shrink-0"
             whileHover={{ scale: 1.05 }}
@@ -71,10 +73,10 @@ export default function Header() {
                 >
                   <Link
                     href={item.href}
-                    className="text-charcoal hover:text-orange transition-colors duration-300 font-medium relative group"
+                    className="text-brand-cream hover:text-white transition-colors duration-300 font-medium relative group"
                   >
                     {item.name}
-                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-brand transition-all duration-300 group-hover:w-full"></span>
+                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-orange transition-all duration-300 group-hover:w-full"></span>
                   </Link>
                 </motion.div>
               ))}
@@ -83,8 +85,11 @@ export default function Header() {
 
           {/* CTA Button */}
           <div className="hidden md:block">
-            <Button className="bg-gradient-brand hover:shadow-brand transform hover:-translate-y-0.5 transition-all duration-300 text-white">
-              Get Started
+            <Button
+              className="bg-brand-orange hover:bg-brand-orange/90 hover:shadow-brand transform hover:-translate-y-0.5 transition-all duration-300 text-white"
+              asChild
+            >
+              <Link href="/contact">Get Started</Link>
             </Button>
           </div>
 
@@ -92,7 +97,7 @@ export default function Header() {
           <div className="md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-charcoal hover:text-orange focus:outline-none focus:text-orange transition-colors duration-300"
+              className="text-brand-cream hover:text-white focus:outline-none transition-colors duration-300"
             >
               {isOpen ? (
                 <X className="h-6 w-6" />
@@ -113,7 +118,7 @@ export default function Header() {
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3 }}
             >
-              <div className="px-2 pt-2 pb-3 space-y-1 bg-white/95 backdrop-blur-lg rounded-lg mt-2 shadow-brand">
+              <div className="px-2 pt-2 pb-3 space-y-1 bg-olive-dark/95 backdrop-blur-lg rounded-lg mt-2 shadow-brand">
                 {navItems.map((item, index) => (
                   <motion.div
                     key={item.name}
@@ -123,7 +128,7 @@ export default function Header() {
                   >
                     <Link
                       href={item.href}
-                      className="text-charcoal hover:text-orange hover:bg-cream block px-3 py-2 rounded-md text-base font-medium transition-all duration-300"
+                      className="text-brand-cream hover:text-white hover:bg-olive-mid block px-3 py-2 rounded-md text-base font-medium transition-all duration-300"
                       onClick={() => setIsOpen(false)}
                     >
                       {item.name}
@@ -131,8 +136,8 @@ export default function Header() {
                   </motion.div>
                 ))}
                 <div className="pt-4 pb-2">
-                  <Button className="w-full bg-gradient-brand text-white">
-                    Get Started
+                  <Button className="w-full bg-brand-orange hover:bg-brand-orange/90 text-white" asChild>
+                    <Link href="/contact" onClick={() => setIsOpen(false)}>Get Started</Link>
                   </Button>
                 </div>
               </div>

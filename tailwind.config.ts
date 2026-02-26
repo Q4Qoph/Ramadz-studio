@@ -1,4 +1,4 @@
-// tailwind.config.ts - Updated with Logo Colors
+// tailwind.config.ts - Updated with RMDZ Brand Palette
 import type { Config } from "tailwindcss";
 
 const config: Config = {
@@ -51,20 +51,18 @@ const config: Config = {
           '4': 'hsl(var(--chart-4))',
           '5': 'hsl(var(--chart-5))'
         },
-        // RMDZ Studios Brand Colors (Based on Logo)
-        charcoal: '#2D2D2D',        // Dark gray from logo
-        slate: '#6B7280',           // Medium gray from logo
-        cream: '#FEF7F0',           // Light cream background
-        orange: {
-          light: '#F97316',         // Bright orange
-          DEFAULT: '#EA580C',       // Main orange from logo
-          dark: '#C2410C',          // Darker orange
+        // RMDZ Studios Brand Colors
+        olive: {
+          dark: '#3D3C2A',    // Hero / dark section backgrounds
+          mid: '#4A4939',     // Slightly lighter dark sections
+          muted: '#636255',   // Decorative circle elements
         },
-        rust: {
-          light: '#DC6803',         // Light rust
-          DEFAULT: '#B45309',       // Main rust color
-          dark: '#92400E',          // Dark rust
-        }
+        brand: {
+          orange: '#B54808',  // Primary CTA, headings on cream
+          cream: '#E5D9B6',   // Text on dark backgrounds, secondary accent
+        },
+        charcoal: '#2D2D2D',  // Body text on light backgrounds
+        cream: '#F5EDD8',     // Light section backgrounds
       },
       borderRadius: {
         lg: 'var(--radius)',
@@ -73,22 +71,13 @@ const config: Config = {
       },
       keyframes: {
         'accordion-down': {
-          from: {
-            height: '0'
-          },
-          to: {
-            height: 'var(--radix-accordion-content-height)'
-          }
+          from: { height: '0' },
+          to: { height: 'var(--radix-accordion-content-height)' }
         },
         'accordion-up': {
-          from: {
-            height: 'var(--radix-accordion-content-height)'
-          },
-          to: {
-            height: '0'
-          }
+          from: { height: 'var(--radix-accordion-content-height)' },
+          to: { height: '0' }
         },
-        // RMDZ Studios custom animations
         "gradient-x": {
           "0%, 100%": {
             "background-size": "200% 200%",
@@ -116,8 +105,9 @@ const config: Config = {
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-brand': 'linear-gradient(135deg, #EA580C 0%, #DC6803 50%, #B45309 100%)',
-        'gradient-soft': 'linear-gradient(135deg, #FEF7F0 0%, #FFFFFF 100%)',
+        'gradient-brand': 'linear-gradient(135deg, #B54808 0%, #8B3606 100%)',
+        'gradient-dark': 'linear-gradient(135deg, #3D3C2A 0%, #4A4939 100%)',
+        'gradient-soft': 'linear-gradient(135deg, #F5EDD8 0%, #FFFFFF 100%)',
       }
     }
   },

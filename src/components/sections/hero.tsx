@@ -1,8 +1,8 @@
-// src/components/sections/hero.tsx
+// src/components/sections/hero.tsx - Dark olive brand theme
 "use client"
 
 import { motion, AnimatePresence } from 'framer-motion'
-import { Play, ArrowRight } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
@@ -12,7 +12,6 @@ export default function Hero() {
   const [isPaused, setIsPaused] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
 
-  // Preload images and detect mobile
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768)
     checkMobile()
@@ -20,20 +19,16 @@ export default function Hero() {
 
     const preloadImages = ['/background1.jpg', '/background2.jpg', '/background3.jpg']
     let loadedCount = 0
-    
+
     preloadImages.forEach(src => {
       const img = new Image()
       img.onload = () => {
         loadedCount++
-        if (loadedCount === preloadImages.length) {
-          setImagesLoaded(true)
-        }
+        if (loadedCount === preloadImages.length) setImagesLoaded(true)
       }
       img.onerror = () => {
         loadedCount++
-        if (loadedCount === preloadImages.length) {
-          setImagesLoaded(true) // Still show even if some images fail
-        }
+        if (loadedCount === preloadImages.length) setImagesLoaded(true)
       }
       img.src = src
     })
@@ -41,18 +36,29 @@ export default function Hero() {
     return () => window.removeEventListener('resize', checkMobile)
   }, [])
 
-  // Reduce motion for accessibility
-  const prefersReducedMotion = typeof window !== 'undefined' && 
-    window.matchMedia('(prefers-reduced-motion: reduce)').matches
-
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-orange-50 via-white to-orange-50">
-      {/* Background Elements */}
-      <div className="absolute inset-0 w-full h-full">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-orange-500/10 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-orange-400/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-orange-500/5 to-orange-400/5 rounded-full blur-3xl"></div>
-      </div>
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-olive-dark">
+      {/* Decorative Circles */}
+      {/* Top-right: large burnt orange circle (partial, overflowing) */}
+      <div
+        className="circle-deco w-96 h-96 top-[-6rem] right-[-6rem]"
+        style={{ backgroundColor: '#B54808', opacity: 0.25 }}
+      />
+      {/* Bottom-left: medium cream circle */}
+      <div
+        className="circle-deco w-64 h-64 bottom-[-4rem] left-[-4rem]"
+        style={{ backgroundColor: '#E5D9B6', opacity: 0.12 }}
+      />
+      {/* Top-center: small dark olive-gray circle */}
+      <div
+        className="circle-deco w-32 h-32 top-24 left-1/2 -translate-x-1/2"
+        style={{ backgroundColor: '#636255', opacity: 0.3 }}
+      />
+      {/* Bottom-right: small burnt orange circle */}
+      <div
+        className="circle-deco w-24 h-24 bottom-24 right-24"
+        style={{ backgroundColor: '#B54808', opacity: 0.35 }}
+      />
 
       <div className="container mx-auto py-14 px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -65,26 +71,27 @@ export default function Hero() {
           >
             {/* Main Heading */}
             <motion.h1
-              className="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold text-gray-900 mb-6 leading-tight"
+              className="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold text-brand-cream mb-6 leading-tight"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.6 }}
             >
-              Empowering{' '}
-              <span className="text-gradient">Creativity</span>
-              <br />
-              Across Every Platform
+              Build Authority.{' '}
+              <span className="text-brand-orange">Structure</span>{' '}
+              Your Message.{' '}
+              <span className="text-gradient">Convert Attention Into Income.</span>
             </motion.h1>
 
             {/* Subtitle */}
             <motion.p
-              className="text-lg sm:text-xl text-gray-600 mb-8 max-w-2xl mx-auto lg:mx-0"
+              className="text-lg sm:text-xl text-brand-cream/75 mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.8 }}
             >
-              We amplify voices, ideas, and brands through captivating content and culture-shifting conversations. 
-              Transform your vision into impact with purpose-driven media.
+              RMDZ Studios is a strategic content and digital growth studio that helps professionals
+              and service-based brands build authority, structure their messaging, and convert online
+              attention into measurable income.
             </motion.p>
 
             {/* CTA Buttons */}
@@ -94,9 +101,9 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 1.0 }}
             >
-              <Button 
-                size="lg" 
-                className="bg-gradient-brand hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 text-white font-semibold px-8 py-3"
+              <Button
+                size="lg"
+                className="bg-brand-orange hover:bg-brand-orange/90 hover:shadow-brand transform hover:-translate-y-1 transition-all duration-300 text-white font-semibold px-8 py-3"
                 asChild
               >
                 <Link href="/contact">
@@ -104,14 +111,13 @@ export default function Hero() {
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>
               </Button>
-              <Button 
-                variant="outline" 
+              <Button
+                variant="outline"
                 size="lg"
-                className="border-2 border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white transition-all duration-300 px-8 py-3"
+                className="border-2 border-brand-cream text-brand-cream hover:bg-brand-cream hover:text-olive-dark transition-all duration-300 px-8 py-3"
                 asChild
               >
                 <Link href="/portfolio">
-                  <Play className="mr-2 h-5 w-5" />
                   View Our Work
                 </Link>
               </Button>
@@ -119,27 +125,27 @@ export default function Hero() {
 
             {/* Stats */}
             <motion.div
-              className="grid grid-cols-3 gap-8 mt-12 pt-12 border-t border-gray-200"
+              className="grid grid-cols-3 gap-8 mt-12 pt-12 border-t border-brand-cream/20"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 1.2 }}
             >
               <div className="text-center lg:text-left">
-                <div className="text-2xl font-bold text-gray-900">50+</div>
-                <div className="text-sm text-gray-600">Projects Completed</div>
+                <div className="text-2xl font-bold text-brand-cream">50+</div>
+                <div className="text-sm text-brand-cream/60">Projects Completed</div>
               </div>
               <div className="text-center lg:text-left">
-                <div className="text-2xl font-bold text-gray-900">25+</div>
-                <div className="text-sm text-gray-600">Happy Clients</div>
+                <div className="text-2xl font-bold text-brand-cream">25+</div>
+                <div className="text-sm text-brand-cream/60">Happy Clients</div>
               </div>
               <div className="text-center lg:text-left">
-                <div className="text-2xl font-bold text-gray-900">100K+</div>
-                <div className="text-sm text-gray-600">Content Views</div>
+                <div className="text-2xl font-bold text-brand-cream">100K+</div>
+                <div className="text-sm text-brand-cream/60">Content Views</div>
               </div>
             </motion.div>
           </motion.div>
 
-          {/* Right Column - Enhanced Gallery with Loading States */}
+          {/* Right Column - Image Gallery */}
           <motion.div
             className="relative"
             initial={{ opacity: 0, x: 50 }}
@@ -167,11 +173,11 @@ export default function Hero() {
                           return (
                             <motion.div
                               key={itemIndex}
-                              className={`${heights[colIndex][itemIndex]} bg-gray-200 rounded-lg animate-pulse`}
+                              className={`${heights[colIndex][itemIndex]} bg-olive-mid rounded-lg`}
                               initial={{ opacity: 0.3 }}
                               animate={{ opacity: [0.3, 0.7, 0.3] }}
-                              transition={{ 
-                                duration: 1.5, 
+                              transition={{
+                                duration: 1.5,
                                 repeat: Infinity,
                                 delay: (colIndex * 3 + itemIndex) * 0.1
                               }}
@@ -185,7 +191,7 @@ export default function Hero() {
               )}
             </AnimatePresence>
 
-            {/* Enhanced Gallery Container */}
+            {/* Gallery Container */}
             <motion.div
               className={`gallery-container ${isPaused ? 'paused' : ''}`}
               onMouseEnter={() => setIsPaused(true)}
@@ -194,67 +200,24 @@ export default function Hero() {
               animate={{ opacity: imagesLoaded ? 1 : 0 }}
               transition={{ duration: 0.5 }}
             >
-              {/* Column 1 */}
               <div className="column column-1">
-                <motion.div 
-                  className="item item-1 gallery-item-hover"
-                  whileHover={!isMobile ? { scale: 1.02, zIndex: 10 } : {}}
-                  transition={{ duration: 0.2 }}
-                />
-                <motion.div 
-                  className="item item-2 gallery-item-hover"
-                  whileHover={!isMobile ? { scale: 1.02, zIndex: 10 } : {}}
-                  transition={{ duration: 0.2 }}
-                />
-                <motion.div 
-                  className="item item-3 gallery-item-hover"
-                  whileHover={!isMobile ? { scale: 1.02, zIndex: 10 } : {}}
-                  transition={{ duration: 0.2 }}
-                />
+                <motion.div className="item item-1 gallery-item-hover" whileHover={!isMobile ? { scale: 1.02, zIndex: 10 } : {}} transition={{ duration: 0.2 }} />
+                <motion.div className="item item-2 gallery-item-hover" whileHover={!isMobile ? { scale: 1.02, zIndex: 10 } : {}} transition={{ duration: 0.2 }} />
+                <motion.div className="item item-3 gallery-item-hover" whileHover={!isMobile ? { scale: 1.02, zIndex: 10 } : {}} transition={{ duration: 0.2 }} />
               </div>
-              
-              {/* Column 2 */}
               <div className="column column-2">
-                <motion.div 
-                  className="item item-1 gallery-item-hover"
-                  whileHover={!isMobile ? { scale: 1.02, zIndex: 10 } : {}}
-                  transition={{ duration: 0.2 }}
-                />
-                <motion.div 
-                  className="item item-2 gallery-item-hover"
-                  whileHover={!isMobile ? { scale: 1.02, zIndex: 10 } : {}}
-                  transition={{ duration: 0.2 }}
-                />
-                <motion.div 
-                  className="item item-3 gallery-item-hover"
-                  whileHover={!isMobile ? { scale: 1.02, zIndex: 10 } : {}}
-                  transition={{ duration: 0.2 }}
-                />
+                <motion.div className="item item-1 gallery-item-hover" whileHover={!isMobile ? { scale: 1.02, zIndex: 10 } : {}} transition={{ duration: 0.2 }} />
+                <motion.div className="item item-2 gallery-item-hover" whileHover={!isMobile ? { scale: 1.02, zIndex: 10 } : {}} transition={{ duration: 0.2 }} />
+                <motion.div className="item item-3 gallery-item-hover" whileHover={!isMobile ? { scale: 1.02, zIndex: 10 } : {}} transition={{ duration: 0.2 }} />
               </div>
-              
-              {/* Column 3 */}
               <div className="column column-3">
-                <motion.div 
-                  className="item item-1 gallery-item-hover"
-                  whileHover={!isMobile ? { scale: 1.02, zIndex: 10 } : {}}
-                  transition={{ duration: 0.2 }}
-                />
-                <motion.div 
-                  className="item item-2 gallery-item-hover"
-                  whileHover={!isMobile ? { scale: 1.02, zIndex: 10 } : {}}
-                  transition={{ duration: 0.2 }}
-                />
-                <motion.div 
-                  className="item item-3 gallery-item-hover"
-                  whileHover={!isMobile ? { scale: 1.02, zIndex: 10 } : {}}
-                  transition={{ duration: 0.2 }}
-                />
+                <motion.div className="item item-1 gallery-item-hover" whileHover={!isMobile ? { scale: 1.02, zIndex: 10 } : {}} transition={{ duration: 0.2 }} />
+                <motion.div className="item item-2 gallery-item-hover" whileHover={!isMobile ? { scale: 1.02, zIndex: 10 } : {}} transition={{ duration: 0.2 }} />
+                <motion.div className="item item-3 gallery-item-hover" whileHover={!isMobile ? { scale: 1.02, zIndex: 10 } : {}} transition={{ duration: 0.2 }} />
               </div>
             </motion.div>
 
-
-
-            {/* Gallery Control Indicator */}
+            {/* Pause Indicator */}
             {!isMobile && (
               <motion.div
                 className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none"
@@ -262,7 +225,7 @@ export default function Hero() {
                 animate={{ opacity: isPaused ? 1 : 0 }}
                 transition={{ duration: 0.3 }}
               >
-                <div className="bg-black/50 text-white px-3 py-1 rounded-full text-sm backdrop-blur-sm">
+                <div className="bg-olive-dark/70 text-brand-cream px-3 py-1 rounded-full text-sm backdrop-blur-sm">
                   Paused
                 </div>
               </motion.div>
@@ -271,9 +234,6 @@ export default function Hero() {
         </div>
       </div>
 
-      
-
-      {/* Enhanced CSS with Performance Optimizations */}
       <style jsx global>{`
         :root {
           --image-1: url("/background1.jpg");
@@ -309,7 +269,6 @@ export default function Hero() {
           width: 100%;
         }
 
-        /* Enhanced hover effects */
         .gallery-item-hover {
           transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
           position: relative;
@@ -320,7 +279,7 @@ export default function Hero() {
           content: '';
           position: absolute;
           inset: 0;
-          background: linear-gradient(45deg, rgba(251, 146, 60, 0.1), rgba(249, 115, 22, 0.1));
+          background: linear-gradient(45deg, rgba(181, 72, 8, 0.15), rgba(139, 54, 6, 0.15));
           opacity: 0;
           transition: opacity 0.3s ease;
           pointer-events: none;
@@ -330,7 +289,6 @@ export default function Hero() {
           opacity: 1;
         }
 
-        /* Column 1 Items with specific background positions */
         .gallery-container .column-1 .item-1 {
           height: 4rem;
           animation: background 5s 150ms infinite ease-in-out;
@@ -349,7 +307,6 @@ export default function Hero() {
           background-position: 0% 100%;
         }
 
-        /* Column 2 Items with middle background positions */
         .gallery-container .column-2 .item-1 {
           height: 4rem;
           animation: background 5s 150ms infinite ease-in-out;
@@ -368,7 +325,6 @@ export default function Hero() {
           background-position: 50% 100%;
         }
 
-        /* Column 3 Items with right background positions */
         .gallery-container .column-3 .item-1 {
           height: 6rem;
           animation: background 5s 280ms infinite ease-in-out;
@@ -387,7 +343,6 @@ export default function Hero() {
           background-position: 100% 100%;
         }
 
-        /* Enhanced Item Base Styles */
         .gallery-container .column .item {
           width: inherit;
           border-radius: 0.5rem;
@@ -397,74 +352,49 @@ export default function Hero() {
           position: relative;
           will-change: transform;
           backface-visibility: hidden;
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
           transition: box-shadow 0.3s ease;
         }
 
         .gallery-container .column .item:hover {
-          box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+          box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
         }
 
-        /* Optimized Animation with smoother transitions */
         @keyframes background {
-          0% {
-            background-image: var(--image-1);
-            filter: brightness(1) contrast(1);
-          }
-          30% {
-            background-image: var(--image-1);
-            filter: brightness(1.02) contrast(1.02);
-          }
-          33% {
-            background-image: var(--image-2);
-            filter: brightness(1) contrast(1);
-          }
-          63% {
-            background-image: var(--image-2);
-            filter: brightness(1.02) contrast(1.02);
-          }
-          66% {
-            background-image: var(--image-3);
-            filter: brightness(1) contrast(1);
-          }
-          96% {
-            background-image: var(--image-3);
-            filter: brightness(1.02) contrast(1.02);
-          }
-          100% {
-            background-image: var(--image-1);
-            filter: brightness(1) contrast(1);
-          }
+          0% { background-image: var(--image-1); filter: brightness(1) contrast(1); }
+          30% { background-image: var(--image-1); filter: brightness(1.02) contrast(1.02); }
+          33% { background-image: var(--image-2); filter: brightness(1) contrast(1); }
+          63% { background-image: var(--image-2); filter: brightness(1.02) contrast(1.02); }
+          66% { background-image: var(--image-3); filter: brightness(1) contrast(1); }
+          96% { background-image: var(--image-3); filter: brightness(1.02) contrast(1.02); }
+          100% { background-image: var(--image-1); filter: brightness(1) contrast(1); }
         }
 
-        /* Mobile Optimizations */
         @media (max-width: 768px) {
           .gallery-container {
             max-width: 16rem;
             gap: 0.25rem;
           }
-          
+
           .gallery-container .column .item {
             background-size: 600px 450px;
           }
-          
+
           .gallery-item-hover:hover::before {
             opacity: 0;
           }
         }
 
-        /* Reduced motion support */
         @media (prefers-reduced-motion: reduce) {
           .gallery-container .column .item {
             animation-duration: 10s;
           }
-          
+
           .gallery-item-hover {
             transition: none;
           }
         }
 
-        /* High contrast mode support */
         @media (prefers-contrast: high) {
           .gallery-container .column .item {
             border: 2px solid currentColor;

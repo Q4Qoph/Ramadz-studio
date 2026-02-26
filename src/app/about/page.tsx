@@ -1,13 +1,12 @@
-// src/app/about/page.tsx
+// src/app/about/page.tsx - Full rewrite with new brand theme
 "use client"
 
 import { motion } from 'framer-motion'
-import { Target, Eye, Heart, Users, Award, Zap, Calendar } from 'lucide-react'
+import { Target, Eye, Heart, Users, Award, Zap, CheckCircle, Search, Layers, Rocket } from 'lucide-react'
 import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
+import Image from 'next/image'
 import Link from 'next/link'
-import { BackgroundGradient } from '@/components/ui/background-gradient'
-import { TextGenerateEffect } from '@/components/ui/text-generate-effect'
 
 const values = [
   {
@@ -49,43 +48,72 @@ const stats = [
   { number: "3+", label: "Years Experience" }
 ]
 
-const timeline = [
+const team = [
   {
-    year: "2021",
-    title: "The Beginning",
-    description: "Started with a one-mic, one-camera setup and a vision to create meaningful content that makes a difference."
+    name: "Daudi Ndong'a",
+    role: "Creative Director & Brand Strategist",
+    photo: "/team-daudi.jpg",
+    initials: "DN",
   },
   {
-    year: "2022",
-    title: "First Major Success",
-    description: "Launched our first viral campaign, reaching over 50K views and establishing our reputation for quality content."
+    name: "Halima Rahamy Twalib",
+    role: "Social Media Strategist & UGC Creator",
+    photo: "/team-halima.jpg",
+    initials: "HT",
   },
   {
-    year: "2023",
-    title: "Studio Expansion",
-    description: "Moved to a dedicated studio space and expanded our team to include specialists in video production and social media."
+    name: "Fredie Obiero",
+    role: "Full-Stack Developer",
+    photo: "/team-fredie.jpg",
+    initials: "FO",
+  },
+]
+
+const targetClients = [
+  "Coaches",
+  "Counselors",
+  "Pastors & ministry leaders",
+  "Podcasters",
+  "Real estate brands",
+  "SMEs & service providers",
+  "Thought leaders building digital authority",
+]
+
+const howWeWork = [
+  {
+    step: "01",
+    icon: Search,
+    title: "Discovery & Audit",
+    description: "We deep-dive into your brand, audience, and goals to understand where you are and where you need to go.",
   },
   {
-    year: "2024",
-    title: "Full-Service Studio",
-    description: "Became a comprehensive creative hub offering podcast production, social media management, and consulting services."
+    step: "02",
+    icon: Layers,
+    title: "Strategy & Structure",
+    description: "We build a clear strategic framework — messaging architecture, content systems, and growth roadmap.",
   },
   {
-    year: "2025",
-    title: "Industry Leaders",
-    description: "Recognized as a leading creative studio, helping clients achieve unprecedented growth and engagement."
-  }
+    step: "03",
+    icon: Rocket,
+    title: "Execute & Scale",
+    description: "We implement, produce, and iterate — turning strategy into measurable results and sustainable growth.",
+  },
 ]
 
 export default function AboutPage() {
   return (
     <div className="pt-20">
       {/* Hero Section */}
-      <section className="py-16 sm:py-24 bg-gradient-to-br from-beige via-white to-beige relative overflow-hidden">
-        <div className="absolute inset-0 w-full h-full">
-          <div className="absolute top-20 left-10 w-72 h-72 bg-gold/10 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-20 right-10 w-96 h-96 bg-gold-light/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
-        </div>
+      <section className="py-16 sm:py-24 bg-olive-dark relative overflow-hidden">
+        {/* Decorative circles */}
+        <div
+          className="circle-deco w-80 h-80 top-[-3rem] right-[-3rem]"
+          style={{ backgroundColor: '#B54808', opacity: 0.2 }}
+        />
+        <div
+          className="circle-deco w-48 h-48 bottom-[-2rem] left-[-2rem]"
+          style={{ backgroundColor: '#E5D9B6', opacity: 0.1 }}
+        />
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
@@ -95,36 +123,41 @@ export default function AboutPage() {
             transition={{ duration: 0.8 }}
           >
             <motion.div
-              className="inline-flex items-center space-x-2 bg-white/80 backdrop-blur-sm rounded-full px-4 py-2 mb-6 shadow-sm"
+              className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 mb-6"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              <span className="text-sm font-medium text-charcoal">About RMDZ Studios</span>
+              <span className="text-sm font-medium text-brand-cream">About RMDZ Studios</span>
             </motion.div>
 
-            <TextGenerateEffect
-              words="Content is Not Just Media, It's Movement"
-              className="text-3xl sm:text-4xl lg:text-6xl font-serif font-bold text-charcoal mb-6"
-            />
+            <motion.h1
+              className="text-3xl sm:text-4xl lg:text-6xl font-serif font-bold text-brand-cream mb-6"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+            >
+              From Experts to{' '}
+              <span className="text-brand-orange">Visible Authorities</span>
+            </motion.h1>
 
             <motion.p
-              className="text-lg sm:text-xl text-gray-600 mb-8 leading-relaxed"
+              className="text-lg sm:text-xl text-brand-cream/70 mb-8 leading-relaxed"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.8 }}
             >
-              We're not just a studio—we're storytellers, strategists, and your creative partners in building 
-              content that doesn't just get seen, but remembered, shared, and acted upon.
+              We transform experts into visible authorities by building structured, strategic,
+              and scalable digital ecosystems that convert influence into income.
             </motion.p>
           </motion.div>
         </div>
       </section>
 
-      {/* Mission & Vision */}
+      {/* Who We Are */}
       <section className="py-16 sm:py-24 bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-16">
+          <div className="grid lg:grid-cols-2 gap-16 items-start">
             {/* Mission */}
             <motion.div
               initial={{ opacity: 0, x: -50 }}
@@ -132,19 +165,16 @@ export default function AboutPage() {
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              <BackgroundGradient className="p-8 bg-white rounded-3xl">
-                <div className="flex items-center space-x-4 mb-6">
-                  <div className="w-12 h-12 bg-gradient-brand rounded-lg flex items-center justify-center">
-                    <Target className="w-6 h-6 text-white" />
-                  </div>
-                  <h2 className="text-2xl font-serif font-bold text-charcoal">Our Mission</h2>
+              <div className="flex items-center space-x-4 mb-6">
+                <div className="w-12 h-12 bg-brand-orange rounded-lg flex items-center justify-center">
+                  <Target className="w-6 h-6 text-white" />
                 </div>
-                <p className="text-gray-600 leading-relaxed text-lg">
-                  To amplify voices, ideas, and brands through captivating content and culture-shifting conversations. 
-                  At RMDZ Studios, we're on a mission to create purpose-driven media that does not just fill feeds, 
-                  it fuels thought, drives engagement, and inspires action.
-                </p>
-              </BackgroundGradient>
+                <h2 className="text-2xl font-serif font-bold text-charcoal">Our Mission</h2>
+              </div>
+              <p className="text-gray-600 leading-relaxed text-lg border-l-4 border-brand-orange pl-6">
+                To transform experts into visible authorities by building structured, strategic,
+                and scalable digital ecosystems that convert influence into income.
+              </p>
             </motion.div>
 
             {/* Vision */}
@@ -154,85 +184,131 @@ export default function AboutPage() {
               transition={{ duration: 0.8, delay: 0.2 }}
               viewport={{ once: true }}
             >
-              <BackgroundGradient className="p-8 bg-white rounded-3xl">
-                <div className="flex items-center space-x-4 mb-6">
-                  <div className="w-12 h-12 bg-gradient-brand rounded-lg flex items-center justify-center">
-                    <Eye className="w-6 h-6 text-white" />
-                  </div>
-                  <h2 className="text-2xl font-serif font-bold text-charcoal">Our Vision</h2>
+              <div className="flex items-center space-x-4 mb-6">
+                <div className="w-12 h-12 bg-olive-dark rounded-lg flex items-center justify-center">
+                  <Eye className="w-6 h-6 text-brand-cream" />
                 </div>
-                <p className="text-gray-600 leading-relaxed text-lg">
-                  To be the go-to creative hub for next-generation content creators, brands, and storytellers, 
-                  where vision meets execution, and ideas are transformed into impact across platforms and audiences.
-                </p>
-              </BackgroundGradient>
+                <h2 className="text-2xl font-serif font-bold text-charcoal">Our Vision</h2>
+              </div>
+              <p className="text-gray-600 leading-relaxed text-lg border-l-4 border-olive-dark pl-6">
+                To become Africa's leading authority-building digital studio for professionals
+                and service-based brands.
+              </p>
             </motion.div>
           </div>
         </div>
       </section>
 
       {/* Our Story */}
-      <section className="py-16 sm:py-24 bg-charcoal text-white">
+      <section className="py-16 sm:py-24 bg-olive-dark text-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
-            className="max-w-4xl mx-auto text-center mb-16"
+            className="max-w-4xl mx-auto text-center mb-12"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold mb-6">
-              Our <span className="text-gradient">Story</span>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold mb-6 text-brand-cream">
+              Our <span className="text-brand-orange">Story</span>
             </h2>
-            <p className="text-lg text-gray-300 leading-relaxed">
-              RMDZ Studios was born from a simple but radical belief: content is not just media, it is movement. 
-              What started as a one-mic, one-camera setup and a small office space evolved into a full-fledged 
-              studio dedicated to shaping digital narratives with heart, strategy, and creative precision.
+            <p className="text-lg text-brand-cream/70 leading-relaxed mb-6">
+              RMDZ Studios was born from a simple but radical belief: content is not just media, it is movement.
+              What started as a one-mic, one-camera setup evolved into a full-fledged studio dedicated to shaping
+              digital narratives with heart, strategy, and creative precision.
             </p>
-          </motion.div>
-
-          {/* Timeline */}
-          <div className="max-w-4xl mx-auto">
-            {timeline.map((item, index) => (
-              <motion.div
-                key={item.year}
-                className="flex items-start space-x-6 mb-12 last:mb-0"
-                initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8, delay: index * 0.2 }}
-                viewport={{ once: true }}
-              >
-                <div className="flex-shrink-0">
-                  <div className="w-16 h-16 bg-gradient-brand rounded-full flex items-center justify-center text-white font-bold text-lg">
-                    {item.year}
-                  </div>
-                </div>
-                <div className="flex-grow">
-                  <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
-                  <p className="text-gray-300 leading-relaxed">{item.description}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-
-          <motion.div
-            className="text-center mt-16"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <p className="text-lg text-gray-300 max-w-3xl mx-auto">
-              We've grown with our clients—podcasts that began as passion projects are now platforms of influence. 
-              Social feeds that once blended in are now setting trends. Our story is a blend of hustle, humanity, 
+            <p className="text-lg text-brand-cream/70 leading-relaxed">
+              We've grown with our clients — podcasts that began as passion projects are now platforms of influence.
+              Social feeds that once blended in are now setting trends. Our story is a blend of hustle, humanity,
               and the relentless pursuit of creative clarity.
             </p>
           </motion.div>
         </div>
       </section>
 
+      {/* Who We Specialize In */}
+      <section className="py-16 sm:py-24 bg-cream/40">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-charcoal mb-4">
+              Who We Specialize{' '}
+              <span className="text-gradient">In Helping</span>
+            </h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              We work with purpose-driven professionals and brands ready to build real digital authority.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-5xl mx-auto">
+            {targetClients.map((client, index) => (
+              <motion.div
+                key={client}
+                className="bg-white rounded-xl p-5 flex items-start space-x-3 hover:shadow-md transition-all duration-300"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.08 }}
+                viewport={{ once: true }}
+              >
+                <CheckCircle className="w-5 h-5 text-brand-orange flex-shrink-0 mt-0.5" />
+                <span className="text-charcoal font-medium text-sm leading-snug">{client}</span>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* How We Work */}
+      <section className="py-16 sm:py-24 bg-white">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-charcoal mb-4">
+              How We <span className="text-gradient">Work</span>
+            </h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              A clear, proven 3-step process that takes you from where you are to where you need to be.
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+            {howWeWork.map((step, index) => (
+              <motion.div
+                key={step.step}
+                className="text-center"
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.2 }}
+                viewport={{ once: true }}
+              >
+                <div className="relative inline-block mb-6">
+                  <div className="w-20 h-20 bg-olive-dark rounded-2xl flex items-center justify-center mx-auto">
+                    <step.icon className="w-9 h-9 text-brand-cream" />
+                  </div>
+                  <span className="absolute -top-3 -right-3 bg-brand-orange text-white text-xs font-bold w-7 h-7 rounded-full flex items-center justify-center">
+                    {step.step}
+                  </span>
+                </div>
+                <h3 className="text-xl font-semibold text-charcoal mb-3">{step.title}</h3>
+                <p className="text-gray-600 leading-relaxed">{step.description}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Values Section */}
-      <section className="py-16 sm:py-24 bg-gradient-to-br from-beige/30 to-white">
+      <section className="py-16 sm:py-24 bg-cream/30">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             className="text-center mb-16"
@@ -260,8 +336,8 @@ export default function AboutPage() {
               >
                 <Card className="h-full hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 border-0 bg-white">
                   <CardContent className="p-8">
-                    <div className="w-16 h-16 bg-gradient-brand rounded-xl flex items-center justify-center mb-6">
-                      <value.icon className="w-8 h-8 text-white" />
+                    <div className="w-14 h-14 bg-brand-orange rounded-xl flex items-center justify-center mb-6">
+                      <value.icon className="w-7 h-7 text-white" />
                     </div>
                     <h3 className="text-xl font-semibold text-charcoal mb-4">{value.title}</h3>
                     <p className="text-gray-600 leading-relaxed">{value.description}</p>
@@ -301,7 +377,7 @@ export default function AboutPage() {
                 transition={{ duration: 0.8, delay: index * 0.2 }}
                 viewport={{ once: true }}
               >
-                <div className="text-4xl sm:text-5xl font-bold text-charcoal mb-2">
+                <div className="text-4xl sm:text-5xl font-bold text-brand-orange mb-2">
                   {stat.number}
                 </div>
                 <div className="text-gray-600 font-medium">{stat.label}</div>
@@ -312,7 +388,7 @@ export default function AboutPage() {
       </section>
 
       {/* Team Section */}
-      <section className="py-16 sm:py-24 bg-gradient-to-br from-beige/30 to-white">
+      <section className="py-16 sm:py-24 bg-cream/30">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             className="text-center mb-16"
@@ -329,32 +405,57 @@ export default function AboutPage() {
             </p>
           </motion.div>
 
-          <motion.div
-            className="max-w-2xl mx-auto text-center"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
+          <div className="grid md:grid-cols-3 gap-10 max-w-4xl mx-auto">
+            {team.map((member, index) => (
+              <motion.div
+                key={member.name}
+                className="text-center"
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.2 }}
+                viewport={{ once: true }}
+              >
+                <div className="relative w-32 h-32 mx-auto mb-5">
+                  {/* Circular image with orange border */}
+                  <div className="w-32 h-32 rounded-full border-4 border-brand-orange overflow-hidden bg-olive-mid flex items-center justify-center">
+                    <Image
+                      src={member.photo}
+                      alt={member.name}
+                      fill
+                      className="object-cover rounded-full"
+                      onError={() => {}}
+                    />
+                    {/* Fallback initials shown behind image */}
+                    <span className="absolute text-2xl font-bold text-brand-cream z-0">
+                      {member.initials}
+                    </span>
+                  </div>
+                </div>
+                <h3 className="text-xl font-semibold text-charcoal mb-1">{member.name}</h3>
+                <p className="text-brand-orange font-medium text-sm">{member.role}</p>
+              </motion.div>
+            ))}
+          </div>
+
+          <motion.p
+            className="text-center text-gray-500 text-sm mt-10"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
             viewport={{ once: true }}
           >
-            <div className="bg-white rounded-2xl p-8 shadow-lg">
-              <div className="w-32 h-32 bg-gradient-brand rounded-full mx-auto mb-6 flex items-center justify-center">
-                <span className="text-4xl font-bold text-white">R</span>
-              </div>
-              <h3 className="text-2xl font-serif font-bold text-charcoal mb-2">RMDZ Studios Team</h3>
-              <p className="text-gray-600 mb-4">Creative Directors & Content Strategists</p>
-              <p className="text-gray-600 leading-relaxed">
-                Our diverse team brings together expertise in video production, podcast creation, 
-                social media strategy, and creative consulting. We're united by our passion for 
-                storytelling and commitment to helping our clients succeed.
-              </p>
-            </div>
-          </motion.div>
+            Team photos will appear once placed at <code>/public/team-daudi.jpg</code>, <code>/public/team-halima.jpg</code>, and <code>/public/team-fredie.jpg</code>.
+          </motion.p>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 sm:py-24 bg-charcoal text-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-16 sm:py-24 bg-olive-dark text-white relative overflow-hidden">
+        <div
+          className="circle-deco w-72 h-72 top-[-2rem] right-[-2rem]"
+          style={{ backgroundColor: '#B54808', opacity: 0.18 }}
+        />
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
             className="max-w-4xl mx-auto text-center"
             initial={{ opacity: 0, y: 30 }}
@@ -362,14 +463,15 @@ export default function AboutPage() {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold mb-6">
-              Ready to Create <span className="text-gradient">Together?</span>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold mb-6 text-brand-cream">
+              Ready to Build Your{' '}
+              <span className="text-brand-orange">Authority?</span>
             </h2>
-            <p className="text-lg text-gray-300 mb-8 leading-relaxed">
-              Let's turn your vision into reality. Join the creators, podcasters, and brands 
-              who trust RMDZ Studios to amplify their voices and maximize their impact.
+            <p className="text-lg text-brand-cream/70 mb-8 leading-relaxed">
+              Let's transform your expertise into a visible, scalable digital presence.
+              Join professionals and service-based brands who trust RMDZ Studios.
             </p>
-            
+
             <motion.div
               className="flex flex-col sm:flex-row gap-4 justify-center"
               initial={{ opacity: 0, y: 30 }}
@@ -377,23 +479,19 @@ export default function AboutPage() {
               transition={{ duration: 0.8, delay: 0.4 }}
               viewport={{ once: true }}
             >
-              <Button 
-                className="bg-gradient-brand hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 text-white font-semibold px-8 py-3 rounded-lg"
+              <Button
+                className="bg-brand-orange hover:bg-brand-orange/90 hover:shadow-brand transform hover:-translate-y-1 transition-all duration-300 text-white font-semibold px-8 py-3"
                 asChild
               >
-                <Link href="/contact">
-                  Start Your Project
-                </Link>
+                <Link href="/contact">Start Your Project</Link>
               </Button>
-              
-              <Button 
-                variant="outline" 
-                className="border-2 border-white text-white hover:bg-white hover:text-charcoal transition-all duration-300 px-8 py-3 rounded-lg"
+
+              <Button
+                variant="outline"
+                className="border-2 border-brand-cream text-brand-cream hover:bg-brand-cream hover:text-olive-dark transition-all duration-300 px-8 py-3"
                 asChild
               >
-                <Link href="/portfolio">
-                  View Our Work
-                </Link>
+                <Link href="/portfolio">View Our Work</Link>
               </Button>
             </motion.div>
           </motion.div>

@@ -7,8 +7,6 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { Card, CardContent } from '@/components/ui/card'
-import { TextGenerateEffect } from '@/components/ui/text-generate-effect'
-import { BackgroundGradient } from '@/components/ui/background-gradient'
 
 const contactInfo = [
   {
@@ -28,7 +26,7 @@ const contactInfo = [
   {
     icon: MapPin,
     title: "Location",
-    details: "Mombasa, Kenya",
+    details: "P.O. Box 00100, Utange, Mombasa, Kenya",
     link: "#",
     description: "East Africa timezone"
   },
@@ -49,11 +47,10 @@ const socialLinks = [
 ]
 
 const serviceOptions = [
-  "Social Media Content Creation",
-  "Podcast Production",
-  "Creative Consulting",
-  "Brand Strategy",
-  "Content Planning",
+  "Social Media Strategy & Management",
+  "SMEs Digital Growth Systems",
+  "Brand Identity Development",
+  "Podcast Production & Monetization",
   "Other"
 ]
 
@@ -116,11 +113,15 @@ export default function ContactPage() {
   return (
     <div className="pt-20">
       {/* Hero Section */}
-      <section className="py-16 sm:py-24 bg-gradient-to-br from-beige via-white to-beige relative overflow-hidden">
-        <div className="absolute inset-0 w-full h-full">
-          <div className="absolute top-20 left-10 w-72 h-72 bg-gold/10 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-20 right-10 w-96 h-96 bg-gold-light/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
-        </div>
+      <section className="py-16 sm:py-24 bg-olive-dark relative overflow-hidden">
+        <div
+          className="circle-deco w-80 h-80 top-[-3rem] right-[-3rem]"
+          style={{ backgroundColor: '#B54808', opacity: 0.2 }}
+        />
+        <div
+          className="circle-deco w-48 h-48 bottom-[-2rem] left-[-2rem]"
+          style={{ backgroundColor: '#E5D9B6', opacity: 0.08 }}
+        />
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
@@ -130,27 +131,32 @@ export default function ContactPage() {
             transition={{ duration: 0.8 }}
           >
             <motion.div
-              className="inline-flex items-center space-x-2 bg-white/80 backdrop-blur-sm rounded-full px-4 py-2 mb-6 shadow-sm"
+              className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 mb-6"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              <span className="text-sm font-medium text-charcoal">Get In Touch</span>
+              <span className="text-sm font-medium text-brand-cream">Get In Touch</span>
             </motion.div>
 
-            <TextGenerateEffect
-              words="Let's Create Something Extraordinary Together"
-              className="text-3xl sm:text-4xl lg:text-6xl font-serif font-bold text-charcoal mb-6"
-            />
+            <motion.h1
+              className="text-3xl sm:text-4xl lg:text-6xl font-serif font-bold text-brand-cream mb-6"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+            >
+              Let&apos;s Build Your{' '}
+              <span className="text-brand-orange">Digital Authority</span>
+            </motion.h1>
 
             <motion.p
-              className="text-lg sm:text-xl text-gray-600 mb-8 leading-relaxed"
+              className="text-lg sm:text-xl text-brand-cream/70 mb-8 leading-relaxed"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.8 }}
             >
-              Ready to amplify your voice and transform your vision into impact? 
-              We're here to help bring your creative projects to life. Let's start the conversation.
+              Ready to build authority, structure your messaging, and convert online attention
+              into measurable income? Let&apos;s start the conversation.
             </motion.p>
           </motion.div>
         </div>
@@ -167,7 +173,7 @@ export default function ContactPage() {
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              <BackgroundGradient className="p-8 bg-white rounded-3xl">
+              <div className="p-8 bg-white rounded-3xl shadow-sm border border-gray-100">
                 <h2 className="text-2xl font-serif font-bold text-charcoal mb-6">
                   Start Your Project
                 </h2>
@@ -234,7 +240,7 @@ export default function ContactPage() {
                           required
                           value={formData.service}
                           onChange={handleInputChange}
-                          className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent"
+                          className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-orange focus:border-transparent"
                         >
                           <option value="">Select a service</option>
                           {serviceOptions.map(option => (
@@ -255,7 +261,7 @@ export default function ContactPage() {
                           name="budget"
                           value={formData.budget}
                           onChange={handleInputChange}
-                          className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent"
+                          className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-orange focus:border-transparent"
                         >
                           <option value="">Select budget range</option>
                           <option value="under-1000">Under $1,000</option>
@@ -274,7 +280,7 @@ export default function ContactPage() {
                           name="timeline"
                           value={formData.timeline}
                           onChange={handleInputChange}
-                          className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent"
+                          className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-orange focus:border-transparent"
                         >
                           <option value="">Select timeline</option>
                           <option value="asap">ASAP</option>
@@ -306,7 +312,7 @@ export default function ContactPage() {
                     <Button
                       type="submit"
                       disabled={isSubmitting}
-                      className="w-full bg-gradient-brand hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 text-white font-semibold py-3"
+                      className="w-full bg-brand-orange hover:bg-brand-orange/90 hover:shadow-brand transform hover:-translate-y-1 transition-all duration-300 text-white font-semibold py-3"
                     >
                       {isSubmitting ? (
                         <>
@@ -335,7 +341,7 @@ export default function ContactPage() {
                     </p>
                   </motion.div>
                 )}
-              </BackgroundGradient>
+              </div>
             </motion.div>
 
             {/* Contact Information */}
@@ -369,7 +375,7 @@ export default function ContactPage() {
                     <Card className="hover:shadow-lg transition-all duration-300 border-0 bg-gradient-to-r from-beige/50 to-white">
                       <CardContent className="p-6">
                         <div className="flex items-start space-x-4">
-                          <div className="w-12 h-12 bg-gradient-brand rounded-lg flex items-center justify-center flex-shrink-0">
+                          <div className="w-12 h-12 bg-brand-orange rounded-lg flex items-center justify-center flex-shrink-0">
                             <info.icon className="w-6 h-6 text-white" />
                           </div>
                           <div className="flex-grow">
@@ -378,7 +384,7 @@ export default function ContactPage() {
                             {info.link !== "#" ? (
                               <a 
                                 href={info.link}
-                                className="text-gold hover:text-charcoal transition-colors duration-300 font-medium"
+                                className="text-brand-orange hover:text-charcoal transition-colors duration-300 font-medium"
                               >
                                 {info.details}
                               </a>
@@ -424,7 +430,7 @@ export default function ContactPage() {
 
               {/* Quick Response Promise */}
               <motion.div
-                className="bg-gradient-to-r from-gold/10 to-gold-light/10 rounded-xl p-6"
+                className="bg-brand-orange/10 rounded-xl p-6"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 1.0 }}
@@ -442,7 +448,7 @@ export default function ContactPage() {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-16 sm:py-24 bg-gradient-to-br from-beige/30 to-white">
+      <section className="py-16 sm:py-24 bg-cream/30">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             className="text-center mb-16"

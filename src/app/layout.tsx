@@ -15,21 +15,21 @@ const playfair = Playfair_Display({
 })
 
 export const metadata: Metadata = {
-  title: 'RMDZ Studios - Empowering Creativity Across Every Platform',
-  description: 'Professional content creation, podcast production, and creative consulting services. We create purpose-driven media that fuels thought, drives engagement, and inspires action.',
-  keywords: 'content creation, podcast production, social media management, creative consulting, UGC, video production',
+  title: 'RMDZ Studios — Strategic Content & Digital Growth',
+  description: 'We help professionals and service-based brands build authority, structure their messaging, and convert online attention into measurable income.',
+  keywords: 'strategic content, digital growth, brand authority, social media strategy, podcast production, brand identity, SME growth, content studio, Mombasa, Kenya',
   authors: [{ name: 'RMDZ Studios' }],
   openGraph: {
-    title: 'RMDZ Studios - Empowering Creativity Across Every Platform',
-    description: 'Professional content creation, podcast production, and creative consulting services.',
+    title: 'RMDZ Studios — Strategic Content & Digital Growth',
+    description: 'We help professionals and service-based brands build authority, structure their messaging, and convert online attention into measurable income.',
     url: 'https://rmdstudios.com',
     siteName: 'RMDZ Studios',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'RMDZ Studios - Empowering Creativity Across Every Platform',
-    description: 'Professional content creation, podcast production, and creative consulting services.',
+    title: 'RMDZ Studios — Strategic Content & Digital Growth',
+    description: 'We help professionals and service-based brands build authority, structure their messaging, and convert online attention into measurable income.',
   },
 }
 

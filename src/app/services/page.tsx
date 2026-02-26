@@ -1,145 +1,145 @@
+// src/app/services/page.tsx - Full rewrite with 4 services
 "use client"
 
 import { motion } from 'framer-motion'
-import { Camera, Mic, MessageSquare, Check, ArrowRight, Play, Users, TrendingUp, Star } from 'lucide-react'
-import { Card, CardContent } from '@/components/ui/card'
+import { BarChart2, TrendingUp, Palette, Mic, CheckCircle, ArrowRight, ChevronDown } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { BackgroundGradient } from '@/components/acenternity/background-gradient'
-import { TextGenerateEffect } from '@/components/ui/text-generate-effect'
+import Link from 'next/link'
+import { useState } from 'react'
 
 const services = [
   {
     id: "social-media",
-    icon: Camera,
-    title: "Social Media Content Creation & Strategy",
-    subtitle: "Amplify your brand across all platforms",
-    description: "Transform your social presence with compelling UGC videos, strategic content planning, and data-driven growth strategies that engage audiences and drive results.",
-    color: "from-blue-500 to-purple-600",
-    platforms: ["YouTube", "Instagram", "Facebook", "TikTok", "LinkedIn", "Twitter"],
+    icon: BarChart2,
+    title: "Social Media Strategy & Management",
+    tagline: "Social media is not posting. It's infrastructure.",
+    description:
+      "We build the strategic foundation that turns your social presence into a lead-generating machine — from brand voice to performance analytics.",
     features: [
-      "UGC Video Production",
-      "Content Planning & Strategy",
-      "Graphic Design & Branding",
-      "Social Media Management",
-      "Analytics & Reporting",
-      "Influencer Collaboration",
-      "Paid Social Campaigns",
-      "Community Management"
+      "Brand Voice & Messaging Architecture",
+      "Monthly Strategic Content Planning",
+      "Caption Writing & Reel Scripting",
+      "Carousel Storytelling",
+      "Audience Retention Analysis",
+      "Monthly Performance Reviews",
     ],
     process: [
-      "Discovery & Brand Analysis",
-      "Content Strategy Development",
-      "Content Creation & Production",
-      "Scheduling & Publishing",
-      "Monitoring & Optimization"
+      { step: "Brand Audit", desc: "We assess your current digital footprint and audience." },
+      { step: "Messaging Architecture", desc: "We define your brand voice, tone, and key messages." },
+      { step: "Content Calendar", desc: "We build a month-by-month strategic content plan." },
+      { step: "Creation", desc: "We produce, write, and design all content assets." },
+      { step: "Performance Review", desc: "We analyze results and refine the strategy monthly." },
     ],
-    pricing: "Starting from $500/month"
+  },
+  {
+    id: "sme-growth",
+    icon: TrendingUp,
+    title: "SMEs Digital Growth Systems",
+    tagline: "We don't just post. We build systems that sell.",
+    description:
+      "A comprehensive digital growth approach for small and medium businesses — from auditing your current position to building funnels that convert.",
+    features: [
+      "Full Business Digital Audit",
+      "Competitor Positioning Analysis",
+      "Value Proposition Structuring",
+      "Sales Funnel Design",
+      "Lead Generation Systems",
+      "WhatsApp & Instagram DM Conversion Flows",
+      "Promotional Campaigns",
+    ],
+    process: [
+      { step: "Audit", desc: "We assess your current digital ecosystem and gaps." },
+      { step: "Position", desc: "We define your competitive advantage and messaging." },
+      { step: "Structure", desc: "We build your value proposition and content pillars." },
+      { step: "Build Funnel", desc: "We design lead capture and conversion systems." },
+      { step: "Launch & Convert", desc: "We execute campaigns and optimize for sales." },
+    ],
+  },
+  {
+    id: "brand-identity",
+    icon: Palette,
+    title: "Brand Identity Development",
+    tagline: "Visibility without clarity is chaos.",
+    description:
+      "We help you define who you are, what you stand for, and how you communicate it — then document it all in a comprehensive brand guide.",
+    features: [
+      "Mission & Vision Articulation",
+      "Color, Typography & Design Language",
+      "Brand Voice Development",
+      "Comprehensive Brand Guideline Document",
+    ],
+    process: [
+      { step: "Discovery", desc: "We uncover your values, audience, and competitive position." },
+      { step: "Define", desc: "We articulate your mission, vision, and brand promise." },
+      { step: "Design", desc: "We create your visual identity — colors, fonts, imagery." },
+      { step: "Document", desc: "We compile everything into a brand guideline document." },
+      { step: "Deploy", desc: "We ensure consistent rollout across all platforms." },
+    ],
   },
   {
     id: "podcast",
     icon: Mic,
-    title: "Podcast Production",
-    subtitle: "From concept to distribution",
-    description: "Complete end-to-end podcast services that transform your ideas into professional audio content that captivates listeners and builds loyal audiences.",
-    color: "from-green-500 to-teal-600",
-    platforms: ["Spotify", "Apple Podcasts", "Google Podcasts", "YouTube", "Anchor", "Buzzsprout"],
+    title: "Podcast Production & Monetization",
+    tagline: "Complete podcast systems from the ground up.",
+    description:
+      "From concept clarity to multi-platform distribution and revenue alignment — we handle every aspect of your podcast journey.",
     features: [
-      "Professional Recording",
-      "Audio Editing & Mixing",
-      "Show Branding & Artwork",
-      "Distribution Setup",
-      "Episode Promotion",
-      "Transcript Services",
-      "Guest Coordination",
-      "Analytics & Growth Strategy"
+      "Concept Clarity Development",
+      "Episode Frameworks",
+      "Audio Editing & Mastering",
+      "Video Podcast Editing",
+      "Short-form Content Repurposing",
+      "Multi-platform Distribution",
+      "Revenue Alignment",
     ],
     process: [
-      "Concept Development",
-      "Recording Session Setup",
-      "Professional Production",
-      "Distribution & Launch",
-      "Ongoing Support & Growth"
+      { step: "Concept", desc: "We clarify your podcast's niche, audience, and format." },
+      { step: "Setup", desc: "We handle technical setup, branding, and episode structure." },
+      { step: "Produce", desc: "We edit audio and video to broadcast quality." },
+      { step: "Repurpose", desc: "We create short clips, graphics, and social content." },
+      { step: "Monetize", desc: "We build sponsorship, affiliate, and audience revenue systems." },
     ],
-    pricing: "Starting from $200/episode"
   },
-  {
-    id: "consulting",
-    icon: MessageSquare,
-    title: "Creative Consulting",
-    subtitle: "Strategic guidance for creative growth",
-    description: "Expert consulting services that help you develop winning strategies, optimize your creative processes, and achieve sustainable growth across all platforms.",
-    color: "from-orange-500 to-red-600",
-    platforms: ["Strategy Sessions", "Workshops", "1-on-1 Coaching", "Team Training"],
-    features: [
-      "Brand Strategy Development",
-      "Content Strategy Planning",
-      "Audience Growth Tactics",
-      "Creative Process Optimization",
-      "Platform-Specific Strategies",
-      "Performance Analysis",
-      "Competitive Research",
-      "Long-term Planning"
-    ],
-    process: [
-      "Initial Assessment",
-      "Strategy Development",
-      "Implementation Planning",
-      "Execution Support",
-      "Results Tracking & Optimization"
-    ],
-    pricing: "Starting from $150/hour"
-  }
-]
-
-const testimonials = [
-  {
-    name: "Sarah Johnson",
-    role: "Content Creator",
-    content: "RMDZ Studios transformed my social media presence. My engagement increased by 300% in just 3 months!",
-    rating: 5
-  },
-  {
-    name: "Mike Chen",
-    role: "Podcast Host",
-    content: "The podcast production quality is outstanding. They handled everything from recording to distribution seamlessly.",
-    rating: 5
-  },
-  {
-    name: "Lisa Rodriguez",
-    role: "Brand Manager",
-    content: "Their creative consulting helped us develop a winning content strategy that boosted our brand awareness significantly.",
-    rating: 5
-  }
 ]
 
 const faqs = [
   {
+    question: "What types of clients do you work with?",
+    answer:
+      "We work with coaches, counselors, pastors, podcasters, real estate brands, SMEs, and thought leaders — anyone looking to build digital authority and convert their expertise into income.",
+  },
+  {
+    question: "Do you offer custom packages?",
+    answer:
+      "Yes. Every client engagement starts with a discovery call where we understand your goals, current position, and desired outcomes. We then design a scope that fits your needs.",
+  },
+  {
     question: "How long does it take to see results?",
-    answer: "Results vary by service and goals, but most clients see improvements within 30-60 days. Social media growth typically shows initial results within 2-4 weeks, while podcast audience building may take 2-3 months."
+    answer:
+      "Brand identity work typically delivers within 2–4 weeks. Social media and growth systems typically show meaningful traction within 60–90 days of consistent execution.",
   },
   {
-    question: "Do you work with businesses of all sizes?",
-    answer: "Yes! We work with individual creators, small businesses, and larger corporations. Our services are scalable and can be customized to fit any budget and requirement."
+    question: "Do you handle everything or do I need a team?",
+    answer:
+      "We're a full-service studio — we handle strategy, content creation, editing, and distribution. You focus on your expertise; we handle the digital infrastructure.",
   },
-  {
-    question: "What platforms do you specialize in?",
-    answer: "We specialize in all major social media platforms including Instagram, TikTok, YouTube, Facebook, LinkedIn, and Twitter. For podcasts, we distribute to all major platforms including Spotify, Apple Podcasts, and Google Podcasts."
-  },
-  {
-    question: "Can I choose just one service or do I need a package?",
-    answer: "You can absolutely choose individual services based on your needs. We also offer bundled packages that provide better value when combining multiple services."
-  }
 ]
 
 export default function ServicesPage() {
+  const [openFaq, setOpenFaq] = useState<number | null>(null)
+
   return (
     <div className="pt-20">
-      {/* Hero Section */}
-      <section className="py-16 sm:py-24 bg-gradient-to-br from-beige via-white to-beige relative overflow-hidden">
-        <div className="absolute inset-0 w-full h-full">
-          <div className="absolute top-20 left-10 w-72 h-72 bg-gold/10 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-20 right-10 w-96 h-96 bg-gold-light/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
-        </div>
+      {/* Hero */}
+      <section className="py-16 sm:py-24 bg-olive-dark relative overflow-hidden">
+        <div
+          className="circle-deco w-80 h-80 top-[-4rem] right-[-4rem]"
+          style={{ backgroundColor: '#B54808', opacity: 0.2 }}
+        />
+        <div
+          className="circle-deco w-48 h-48 bottom-[-2rem] left-[-2rem]"
+          style={{ backgroundColor: '#E5D9B6', opacity: 0.08 }}
+        />
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
@@ -149,244 +149,128 @@ export default function ServicesPage() {
             transition={{ duration: 0.8 }}
           >
             <motion.div
-              className="inline-flex items-center space-x-2 bg-white/80 backdrop-blur-sm rounded-full px-4 py-2 mb-6 shadow-sm"
+              className="inline-flex items-center bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 mb-6"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              <span className="text-sm font-medium text-charcoal">Our Services</span>
+              <span className="text-sm font-medium text-brand-cream">Our Services</span>
             </motion.div>
 
-            <TextGenerateEffect
-              words="Comprehensive Creative Solutions for Every Platform"
-              className="text-3xl sm:text-4xl lg:text-6xl font-serif font-bold text-charcoal mb-6"
-            />
-
-            <motion.p
-              className="text-lg sm:text-xl text-gray-600 mb-8 leading-relaxed"
+            <motion.h1
+              className="text-3xl sm:text-4xl lg:text-6xl font-serif font-bold text-brand-cream mb-6"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.8 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
             >
-              From concept to distribution, we provide end-to-end creative services that amplify your voice 
-              and maximize your impact across all digital platforms.
+              Strategic Systems for{' '}
+              <span className="text-brand-orange">Real Growth</span>
+            </motion.h1>
+
+            <motion.p
+              className="text-lg sm:text-xl text-brand-cream/70 mb-8 max-w-3xl mx-auto leading-relaxed"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+            >
+              Four focused service areas designed to build authority, structure your messaging,
+              and convert online attention into measurable income.
             </motion.p>
           </motion.div>
         </div>
       </section>
 
-      {/* Services Detail Section */}
-      <section className="py-16 sm:py-24 bg-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="space-y-24">
-            {services.map((service, index) => (
+      {/* Service Detail Sections */}
+      {services.map((service, serviceIndex) => (
+        <section
+          key={service.id}
+          id={service.id}
+          className={`py-16 sm:py-24 ${serviceIndex % 2 === 0 ? 'bg-white' : 'bg-cream/30'}`}
+        >
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid lg:grid-cols-2 gap-16 items-start">
+              {/* Left: Info */}
               <motion.div
-                key={service.id}
-                id={service.id}
-                className={`grid lg:grid-cols-2 gap-16 items-center ${
-                  index % 2 === 1 ? 'lg:grid-flow-col-dense' : ''
-                }`}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                className={serviceIndex % 2 === 1 ? 'lg:order-2' : ''}
+                initial={{ opacity: 0, x: serviceIndex % 2 === 0 ? -50 : 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8 }}
                 viewport={{ once: true }}
               >
-                {/* Content */}
-                <div className={index % 2 === 1 ? 'lg:col-start-2' : ''}>
-                  <motion.div
-                    className={`inline-block bg-gradient-to-r ${service.color} text-white text-sm px-3 py-1 rounded-full mb-4`}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.6, delay: 0.2 }}
-                    viewport={{ once: true }}
-                  >
-                    Service #{index + 1}
-                  </motion.div>
-
-                  <motion.h2
-                    className="text-3xl sm:text-4xl font-serif font-bold text-charcoal mb-4"
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.4 }}
-                    viewport={{ once: true }}
-                  >
-                    {service.title}
-                  </motion.h2>
-
-                  <motion.p
-                    className="text-xl text-gold font-medium mb-6"
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.6 }}
-                    viewport={{ once: true }}
-                  >
-                    {service.subtitle}
-                  </motion.p>
-
-                  <motion.p
-                    className="text-gray-600 mb-8 leading-relaxed text-lg"
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.8 }}
-                    viewport={{ once: true }}
-                  >
-                    {service.description}
-                  </motion.p>
-
-                  {/* Platforms */}
-                  <motion.div
-                    className="mb-8"
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 1.0 }}
-                    viewport={{ once: true }}
-                  >
-                    <h4 className="font-semibold text-charcoal mb-3">Platforms & Tools:</h4>
-                    <div className="flex flex-wrap gap-2">
-                      {service.platforms.map((platform, platformIndex) => (
-                        <span
-                          key={platform}
-                          className="bg-beige text-charcoal text-sm px-3 py-1 rounded-full"
-                        >
-                          {platform}
-                        </span>
-                      ))}
-                    </div>
-                  </motion.div>
-
-                  {/* Pricing */}
-                  <motion.div
-                    className="mb-8"
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 1.2 }}
-                    viewport={{ once: true }}
-                  >
-                    <div className="text-2xl font-bold text-charcoal">{service.pricing}</div>
-                    <div className="text-gray-600">Custom packages available</div>
-                  </motion.div>
-
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 1.4 }}
-                    viewport={{ once: true }}
-                  >
-                    <Button 
-                      className={`bg-gradient-to-r ${service.color} hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 text-white`}
-                    >
-                      Get Started
-                      <ArrowRight className="ml-2 h-4 w-4" />
-                    </Button>
-                  </motion.div>
+                <div className="w-16 h-16 bg-brand-orange rounded-2xl flex items-center justify-center mb-6">
+                  <service.icon className="w-8 h-8 text-white" />
                 </div>
 
-                {/* Features & Process Cards */}
-                <div className={index % 2 === 1 ? 'lg:col-start-1' : ''}>
-                  <div className="space-y-6">
-                    {/* Features Card */}
-                    <BackgroundGradient className="p-6 bg-white rounded-2xl">
-                      <div className="flex items-center space-x-3 mb-4">
-                        <service.icon className="w-6 h-6 text-gold" />
-                        <h4 className="font-semibold text-charcoal">What's Included</h4>
-                      </div>
-                      <div className="grid grid-cols-2 gap-3">
-                        {service.features.map((feature, featureIndex) => (
-                          <motion.div
-                            key={feature}
-                            className="flex items-center space-x-2"
-                            initial={{ opacity: 0, x: -20 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            transition={{ duration: 0.4, delay: featureIndex * 0.1 }}
-                            viewport={{ once: true }}
-                          >
-                            <Check className="w-4 h-4 text-green-500 flex-shrink-0" />
-                            <span className="text-sm text-gray-600">{feature}</span>
-                          </motion.div>
-                        ))}
-                      </div>
-                    </BackgroundGradient>
+                <span className="text-brand-orange font-semibold text-sm uppercase tracking-wider mb-2 block">
+                  {service.tagline}
+                </span>
 
-                    {/* Process Card */}
-                    <Card className="bg-gradient-to-br from-gray-50 to-white border-0">
-                      <CardContent className="p-6">
-                        <h4 className="font-semibold text-charcoal mb-4">Our Process</h4>
-                        <div className="space-y-3">
-                          {service.process.map((step, stepIndex) => (
-                            <motion.div
-                              key={step}
-                              className="flex items-center space-x-3"
-                              initial={{ opacity: 0, x: -20 }}
-                              whileInView={{ opacity: 1, x: 0 }}
-                              transition={{ duration: 0.4, delay: stepIndex * 0.1 }}
-                              viewport={{ once: true }}
-                            >
-                              <div className="w-6 h-6 bg-gradient-brand rounded-full flex items-center justify-center text-white text-xs font-bold">
-                                {stepIndex + 1}
-                              </div>
-                              <span className="text-sm text-gray-600">{step}</span>
-                            </motion.div>
-                          ))}
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </div>
-                </div>
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-bold text-charcoal mb-4">
+                  {service.title}
+                </h2>
+
+                <p className="text-lg text-gray-600 leading-relaxed mb-8">
+                  {service.description}
+                </p>
+
+                <h3 className="text-lg font-semibold text-charcoal mb-4">What&apos;s Included</h3>
+                <ul className="space-y-3 mb-8">
+                  {service.features.map((feature) => (
+                    <li key={feature} className="flex items-start space-x-3">
+                      <CheckCircle className="w-5 h-5 text-brand-orange flex-shrink-0 mt-0.5" />
+                      <span className="text-gray-700">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <Button
+                  className="bg-brand-orange hover:bg-brand-orange/90 hover:shadow-brand transform hover:-translate-y-0.5 transition-all duration-300 text-white"
+                  asChild
+                >
+                  <Link href="/contact">
+                    Get Started
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
+                </Button>
               </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      {/* Testimonials Section */}
-      <section className="py-16 sm:py-24 bg-charcoal text-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            className="text-center mb-16"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold mb-6">
-              What Our <span className="text-gradient">Clients Say</span>
-            </h2>
-            <p className="text-lg text-gray-300 max-w-3xl mx-auto">
-              Don't just take our word for it. Here's what our clients have to say about working with RMDZ Studios.
-            </p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => (
+              {/* Right: Process */}
               <motion.div
-                key={testimonial.name}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: index * 0.2 }}
+                className={serviceIndex % 2 === 1 ? 'lg:order-1' : ''}
+                initial={{ opacity: 0, x: serviceIndex % 2 === 0 ? 50 : -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
                 viewport={{ once: true }}
               >
-                <Card className="bg-white/10 backdrop-blur-sm border-white/20 text-white h-full">
-                  <CardContent className="p-6">
-                    <div className="flex mb-4">
-                      {[...Array(testimonial.rating)].map((_, i) => (
-                        <Star key={i} className="w-5 h-5 text-gold fill-current" />
-                      ))}
-                    </div>
-                    <p className="text-gray-200 mb-6 leading-relaxed">"{testimonial.content}"</p>
-                    <div>
-                      <div className="font-semibold">{testimonial.name}</div>
-                      <div className="text-gray-400 text-sm">{testimonial.role}</div>
-                    </div>
-                  </CardContent>
-                </Card>
+                <h3 className="text-xl font-semibold text-charcoal mb-6">Our Process</h3>
+                <div className="space-y-4">
+                  {service.process.map((step, stepIndex) => (
+                    <motion.div
+                      key={step.step}
+                      className="flex items-start space-x-4 bg-white rounded-xl p-5 shadow-sm border border-gray-100"
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, delay: 0.4 + stepIndex * 0.1 }}
+                      viewport={{ once: true }}
+                    >
+                      <div className="w-8 h-8 bg-brand-orange rounded-full flex items-center justify-center flex-shrink-0 text-white text-sm font-bold">
+                        {stepIndex + 1}
+                      </div>
+                      <div>
+                        <h4 className="font-semibold text-charcoal">{step.step}</h4>
+                        <p className="text-gray-600 text-sm mt-1">{step.desc}</p>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
               </motion.div>
-            ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      ))}
 
       {/* FAQ Section */}
-      <section className="py-16 sm:py-24 bg-gradient-to-br from-beige/30 to-white">
+      <section className="py-16 sm:py-24 bg-olive-dark">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             className="text-center mb-16"
@@ -395,29 +279,37 @@ export default function ServicesPage() {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-charcoal mb-6">
-              Frequently Asked <span className="text-gradient">Questions</span>
+            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-brand-cream mb-4">
+              Frequently Asked <span className="text-brand-orange">Questions</span>
             </h2>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              Have questions about our services? We've got answers to help you make the right decision.
-            </p>
           </motion.div>
 
-          <div className="max-w-3xl mx-auto space-y-6">
+          <div className="max-w-3xl mx-auto space-y-4">
             {faqs.map((faq, index) => (
               <motion.div
                 key={faq.question}
-                initial={{ opacity: 0, y: 30 }}
+                className="bg-olive-mid rounded-xl overflow-hidden"
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: index * 0.1 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
               >
-                <Card className="bg-white hover:shadow-lg transition-all duration-300">
-                  <CardContent className="p-6">
-                    <h4 className="font-semibold text-charcoal mb-3 text-lg">{faq.question}</h4>
-                    <p className="text-gray-600 leading-relaxed">{faq.answer}</p>
-                  </CardContent>
-                </Card>
+                <button
+                  className="w-full flex items-center justify-between p-6 text-left"
+                  onClick={() => setOpenFaq(openFaq === index ? null : index)}
+                >
+                  <span className="font-semibold text-brand-cream">{faq.question}</span>
+                  <ChevronDown
+                    className={`w-5 h-5 text-brand-orange transition-transform duration-300 flex-shrink-0 ml-4 ${
+                      openFaq === index ? 'rotate-180' : ''
+                    }`}
+                  />
+                </button>
+                {openFaq === index && (
+                  <div className="px-6 pb-6">
+                    <p className="text-brand-cream/70 leading-relaxed">{faq.answer}</p>
+                  </div>
+                )}
               </motion.div>
             ))}
           </div>
@@ -425,7 +317,7 @@ export default function ServicesPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 sm:py-24 bg-charcoal text-white">
+      <section className="py-16 sm:py-24 bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             className="max-w-4xl mx-auto text-center"
@@ -434,65 +326,35 @@ export default function ServicesPage() {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold mb-6">
-              Ready to <span className="text-gradient">Get Started?</span>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-charcoal mb-6">
+              Ready to Build Your{' '}
+              <span className="text-gradient">Digital Authority?</span>
             </h2>
-            <p className="text-lg text-gray-300 mb-8 leading-relaxed">
-              Let's discuss your project and create a custom solution that fits your needs and budget. 
-              Get in touch today for a free consultation.
+            <p className="text-lg text-gray-600 mb-8 max-w-2xl mx-auto leading-relaxed">
+              Let&apos;s have a conversation about your goals. We&apos;ll figure out the best
+              strategic path forward together.
             </p>
-            
-            <motion.div
-              className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              viewport={{ once: true }}
-            >
-              <Button 
-                size="lg" 
-                className="bg-gradient-brand hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 text-white font-semibold px-8 py-4 text-lg"
-              >
-                Start Your Project
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
-              
-              <Button 
-                variant="outline" 
-                size="lg"
-                className="border-2 border-white text-white hover:bg-white hover:text-charcoal transition-all duration-300 px-8 py-4 text-lg"
-              >
-                Schedule Consultation
-              </Button>
-            </motion.div>
 
-            {/* Contact Info */}
-            <motion.div
-              className="pt-8 border-t border-gray-700"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-              viewport={{ once: true }}
-            >
-              <p className="text-gray-400 mb-4">
-                Have questions? We're here to help.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center text-sm">
-                <a 
-                  href="mailto:rmdstudios0@gmail.com" 
-                  className="text-gold hover:text-white transition-colors duration-300 font-medium"
-                >
-                  rmdstudios0@gmail.com
-                </a>
-                <span className="hidden sm:block text-gray-500">|</span>
-                <a 
-                  href="tel:+254713464208" 
-                  className="text-gold hover:text-white transition-colors duration-300 font-medium"
-                >
-                  +254 713 464 208
-                </a>
-              </div>
-            </motion.div>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button
+                size="lg"
+                className="bg-brand-orange hover:bg-brand-orange/90 hover:shadow-brand transform hover:-translate-y-1 transition-all duration-300 text-white font-semibold px-8 py-4"
+                asChild
+              >
+                <Link href="/contact">
+                  Start a Conversation
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Link>
+              </Button>
+              <Button
+                variant="outline"
+                size="lg"
+                className="border-2 border-charcoal text-charcoal hover:bg-charcoal hover:text-white transition-all duration-300 px-8 py-4"
+                asChild
+              >
+                <Link href="/portfolio">View Our Work</Link>
+              </Button>
+            </div>
           </motion.div>
         </div>
       </section>
