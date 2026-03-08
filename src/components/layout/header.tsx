@@ -89,7 +89,7 @@ export default function Header() {
           {/* CTA Button */}
           <div className="hidden md:block">
             <Button
-              className="bg-brand-orange hover:bg-brand-orange/90 hover:shadow-brand transform hover:-translate-y-0.5 transition-all duration-300 text-white"
+              className="bg-brand-orange hover:bg-brand-orange/90 hover:shadow-brand transform hover:-translate-y-0.5 transition-all duration-300 text-white rounded-full px-8 py-5 text-base"
               asChild
             >
               <Link href="/contact">Get Started</Link>
@@ -139,7 +139,7 @@ export default function Header() {
                   </motion.div>
                 ))}
                 <div className="pt-4 pb-2">
-                  <Button className="w-full bg-brand-orange hover:bg-brand-orange/90 text-white" asChild>
+                  <Button className="w-full bg-brand-orange hover:bg-brand-orange/90 text-white rounded-full" asChild>
                     <Link href="/contact" onClick={() => setIsOpen(false)}>Get Started</Link>
                   </Button>
                 </div>

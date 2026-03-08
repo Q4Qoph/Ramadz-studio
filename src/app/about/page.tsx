@@ -52,19 +52,19 @@ const team = [
   {
     name: "Daudi Ndong'a",
     role: "Creative Director & Brand Strategist",
-    photo: "/team-daudi.jpg",
+    photo: "/team-daudi.jpeg",
     initials: "DN",
   },
   {
     name: "Halima Rahamy Twalib",
     role: "Social Media Strategist & UGC Creator",
-    photo: "/team-halima.jpg",
+    photo: "/team-halima.jpeg",
     initials: "HT",
   },
   {
     name: "Fredie Obiero",
     role: "Full-Stack Developer",
-    photo: "/team-fredie.jpg",
+    photo: "/team-fredie.jpeg",
     initials: "FO",
   },
 ]
@@ -422,13 +422,10 @@ export default function AboutPage() {
                       src={member.photo}
                       alt={member.name}
                       fill
-                      className="object-cover rounded-full"
+                      className="object-cover rounded-full object-top"
                       onError={() => {}}
                     />
-                    {/* Fallback initials shown behind image */}
-                    <span className="absolute text-2xl font-bold text-brand-cream z-0">
-                      {member.initials}
-                    </span>
+                    
                   </div>
                 </div>
                 <h3 className="text-xl font-semibold text-charcoal mb-1">{member.name}</h3>
@@ -437,15 +434,7 @@ export default function AboutPage() {
             ))}
           </div>
 
-          <motion.p
-            className="text-center text-gray-500 text-sm mt-10"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
-            viewport={{ once: true }}
-          >
-            Team photos will appear once placed at <code>/public/team-daudi.jpg</code>, <code>/public/team-halima.jpg</code>, and <code>/public/team-fredie.jpg</code>.
-          </motion.p>
+          
         </div>
       </section>
 
