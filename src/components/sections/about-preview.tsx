@@ -7,7 +7,7 @@ import Image from "next/image";
 
 export default function AboutPreview() {
   return (
-    <section className="py-10 sm:py-14 bg-white">
+    <section className="py-10 sm:py-14 bg-cream/40">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section heading */}
         <motion.h2

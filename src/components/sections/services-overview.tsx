@@ -1,59 +1,112 @@
 "use client"
 
-import { motion } from 'framer-motion'
-import { BarChart2, TrendingUp, Palette, Mic, ArrowRight } from 'lucide-react'
+import { useRef } from 'react'
+import { motion, useScroll, useTransform, type MotionValue } from 'framer-motion'
+import { ArrowUpRight, ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
+import Image from 'next/image'
 import Link from 'next/link'
 
 const services = [
   {
-    icon: BarChart2,
+    slug: "social-media",
+    image: "/background2.jpg",
     title: "Social Media Strategy & Management",
     description: "Social media is not posting. It's infrastructure. We build brand voice, craft strategic content calendars, and drive measurable audience growth.",
-    tags: ["Content Planning", "Caption Writing", "Reel Scripting", "Analytics"],
   },
   {
-    icon: TrendingUp,
+    slug: "sme-growth",
+    image: "/background3.jpg",
     title: "SMEs Digital Growth Systems",
     description: "We don't just post. We build systems that sell — from business audits and competitor positioning to sales funnels and lead generation.",
-    tags: ["Digital Audit", "Sales Funnel", "Lead Generation", "Campaigns"],
   },
   {
-    icon: Palette,
+    slug: "brand-identity",
+    image: "/background1.jpg",
     title: "Brand Identity Development",
     description: "Visibility without clarity is chaos. We articulate your mission, develop your visual language, and document a comprehensive brand guide.",
-    tags: ["Mission & Vision", "Visual Identity", "Brand Voice", "Guidelines"],
   },
   {
-    icon: Mic,
+    slug: "podcast",
+    image: "/background2.jpg",
     title: "Podcast Production & Monetization",
     description: "Complete podcast systems from the ground up — concept, audio/video editing, multi-platform distribution, and revenue alignment.",
-    tags: ["Audio Editing", "Video Podcast", "Distribution", "Monetization"],
   },
 ]
 
-export default function ServicesOverview() {
+function ServiceCard({
+  service,
+  index,
+  scrollYProgress,
+}: {
+  service: { slug: string; image: string; title: string; description: string }
+  index: number
+  scrollYProgress: MotionValue<number>
+}) {
+  const start = index * 0.2
+  const end = start + 0.22
+  const y = useTransform(scrollYProgress, [start, end], [280, 0])
+  const opacity = useTransform(scrollYProgress, [start, start + 0.08], [0, 1])
+  const scale = useTransform(scrollYProgress, [start, end], [0.88, 1])
+
   return (
-    <section className="py-16 sm:py-24 bg-cream/40">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
+    <motion.div style={{ y, opacity, scale }} className="h-full">
+      <Link href={`/services#${service.slug}`} aria-label={`Learn more about ${service.title}`} className="block h-full">
+      <Card className="h-full group hover:shadow-xl transition-all duration-500 border-0 bg-white relative overflow-hidden">
+        {/* Diagonal arrow — top-right */}
+        <ArrowUpRight className="absolute top-4 right-4 z-10 w-5 h-5 text-charcoal/40 group-hover:text-brand-orange transition-colors duration-300" />
+
+        {/* Image — flush top */}
+        <div className="relative w-full aspect-[4/3] overflow-hidden bg-cream">
+          <Image
+            src={service.image}
+            alt={service.title}
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
+          />
+        </div>
+
+        <CardContent className="p-5">
+          <h3 className="text-base font-semibold text-charcoal mb-2 leading-snug pr-4">{service.title}</h3>
+          <p className="text-gray-500 text-sm leading-relaxed mb-5">{service.description}</p>
+
+          {/* Learn More with sliding arrow */}
+          <div className="flex items-center justify-between text-brand-orange font-semibold text-sm">
+            <span>Learn More</span>
+            <span className="inline-flex -translate-x-[180px] opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-500">
+              <ArrowRight className="w-4 h-4" />
+            </span>
+          </div>
+        </CardContent>
+      </Card>
+      </Link>
+    </motion.div>
+  )
+}
+
+export default function ServicesOverview() {
+  const outerRef = useRef<HTMLDivElement>(null)
+  const { scrollYProgress } = useScroll({
+    target: outerRef,
+    offset: ["start start", "end end"],
+  })
+  const bgTextOpacity = useTransform(scrollYProgress, [0, 0.4, 0.85], [1, 0.5, 0])
+
+  return (
+    <section className="bg-cream/40">
+
+      {/* ── Header (normal flow) ── */}
+      {/* <div className="container mx-auto px-4 sm:px-6 lg:px-8 pt-16 sm:pt-24 pb-8">
         <motion.div
-          className="text-center mb-16"
+          className="text-center"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <motion.div
-            className="inline-flex items-center space-x-2 bg-white rounded-full px-4 py-2 mb-6 shadow-sm"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            viewport={{ once: true }}
-          >
-            <span className="text-sm font-medium text-charcoal">Our Services</span>
-          </motion.div>
+
 
           <motion.h2
             className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-charcoal mb-6"
@@ -77,74 +130,54 @@ export default function ServicesOverview() {
             end-to-end strategic services that convert your expertise into income.
           </motion.p>
         </motion.div>
+      </div> */}
 
-        {/* Services Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-          {services.map((service, index) => (
-            <motion.div
-              key={service.title}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: index * 0.15 }}
-              viewport={{ once: true }}
+      {/* ── Scroll-driven card reveal ── */}
+      <div ref={outerRef} className="relative min-h-[280vh]">
+        <div className="sticky top-0 h-screen overflow-hidden flex items-center">
+
+          {/* Watermark */}
+          <motion.div
+            className="absolute inset-0 flex items-center justify-center pointer-events-none z-0 select-none"
+            style={{ opacity: bgTextOpacity }}
+          >
+            <span
+              className="text-[8rem] sm:text-[12rem] lg:text-[16rem] font-serif font-bold whitespace-nowrap leading-none"
+              style={{ color: 'rgba(45,45,45,0.08)' }}
             >
-              <Card className="h-full hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 border-0 bg-white">
-                <CardContent className="p-8">
-                  <div className="w-14 h-14 bg-brand-orange rounded-xl flex items-center justify-center mb-6">
-                    <service.icon className="w-7 h-7 text-white" />
-                  </div>
+              What We Do
+            </span>
+          </motion.div>
 
-                  <h3 className="text-lg font-semibold text-charcoal mb-3 leading-snug">{service.title}</h3>
-                  <p className="text-gray-600 mb-6 leading-relaxed text-sm">{service.description}</p>
-
-                  <div className="space-y-2 mb-6">
-                    {service.tags.map((tag, tagIndex) => (
-                      <motion.div
-                        key={tag}
-                        className="inline-block bg-cream text-charcoal text-xs px-3 py-1 rounded-full mr-2 mb-2"
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.4, delay: 0.8 + tagIndex * 0.1 }}
-                        viewport={{ once: true }}
-                      >
-                        {tag}
-                      </motion.div>
-                    ))}
-                  </div>
-
-                  <Button
-                    variant="ghost"
-                    className="text-brand-orange hover:text-brand-orange hover:bg-brand-orange/10 p-0 h-auto font-semibold group"
-                    asChild
-                  >
-                    <Link href="/services">
-                      Learn More
-                      <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                    </Link>
-                  </Button>
-                </CardContent>
-              </Card>
-            </motion.div>
-          ))}
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {services.map((service, index) => (
+                <ServiceCard
+                  key={service.title}
+                  service={service}
+                  index={index}
+                  scrollYProgress={scrollYProgress}
+                />
+              ))}
+            </div>
+          </div>
         </div>
+      </div>
 
-        {/* CTA */}
+      {/* ── CTA (normal flow) ── */}
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 pb-16 sm:pb-24">
         <motion.div
           className="text-center"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.8 }}
+          transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
           <Button
-            size="lg"
-            className="bg-brand-orange hover:bg-brand-orange/90 hover:shadow-brand transform hover:-translate-y-1 transition-all duration-300 text-white"
+            className="bg-brand-orange hover:bg-brand-orange/90 hover:shadow-brand transform hover:-translate-y-1 transition-all duration-300 text-white font-semibold px-10 py-6 text-base sm:text-lg rounded-full"
             asChild
           >
-            <Link href="/services">
-              View All Services
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </Link>
+            <Link href="/services">View All Services</Link>
           </Button>
         </motion.div>
       </div>
