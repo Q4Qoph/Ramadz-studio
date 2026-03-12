@@ -13,15 +13,15 @@ const features = [
 
 export default function CTASection() {
   return (
-    <section className="py-16 sm:py-24 bg-olive-dark relative overflow-hidden">
+    <section className="py-16 sm:py-24 bg-cream/40 relative overflow-hidden">
       {/* Decorative circles */}
       <div
         className="circle-deco w-80 h-80 top-[-4rem] right-[-4rem]"
-        style={{ backgroundColor: '#B54808', opacity: 0.15 }}
+        style={{ backgroundColor: '#B54808', opacity: 0.10 }}
       />
       <div
         className="circle-deco w-48 h-48 bottom-[-3rem] left-[-3rem]"
-        style={{ backgroundColor: '#E5D9B6', opacity: 0.08 }}
+        style={{ backgroundColor: '#4A4939', opacity: 0.08 }}
       />
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -34,18 +34,18 @@ export default function CTASection() {
         >
           {/* Header pill */}
           <motion.div
-            className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 mb-6"
+            className="inline-flex items-center space-x-2 bg-olive-dark/10 backdrop-blur-sm rounded-full px-4 py-2 mb-6"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
           >
             <Target className="w-4 h-4 text-brand-orange" />
-            <span className="text-sm font-medium text-brand-cream">Ready to Start?</span>
+            <span className="text-sm font-medium text-olive-dark">Ready to Start?</span>
           </motion.div>
 
           <motion.h2
-            className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-brand-cream mb-6"
+            className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-charcoal mb-6"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
@@ -56,7 +56,7 @@ export default function CTASection() {
           </motion.h2>
 
           <motion.p
-            className="text-lg sm:text-xl text-brand-cream/70 mb-12 max-w-3xl mx-auto leading-relaxed"
+            className="text-lg sm:text-xl text-charcoal/65 mb-12 max-w-3xl mx-auto leading-relaxed"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
@@ -78,7 +78,7 @@ export default function CTASection() {
             {features.map((feature, index) => (
               <motion.div
                 key={feature.text}
-                className="flex items-center justify-center space-x-3 text-brand-cream"
+                className="flex items-center justify-center space-x-3 text-charcoal"
                 initial={{ opacity: 0, scale: 0.8 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.6, delay: 1.0 + index * 0.1 }}
@@ -114,7 +114,7 @@ export default function CTASection() {
             <Button
               variant="ghost"
               size="lg"
-              className="text-brand-cream hover:text-white hover:bg-olive-mid font-semibold px-8 py-4 text-lg"
+              className="text-olive-dark hover:text-olive-dark hover:bg-olive-dark/10 font-semibold px-8 py-4 text-lg"
               asChild
             >
               <Link href="/portfolio">View Our Work</Link>
@@ -123,13 +123,13 @@ export default function CTASection() {
 
           {/* Contact Info */}
           <motion.div
-            className="mt-12 pt-8 border-t border-brand-cream/20"
+            className="mt-12 pt-8 border-t border-charcoal/15"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 1.4 }}
             viewport={{ once: true }}
           >
-            <p className="text-brand-cream/60 mb-4">
+            <p className="text-charcoal/55 mb-4">
               Have questions? We're here to help.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center text-sm">
@@ -139,7 +139,7 @@ export default function CTASection() {
               >
                 rmdstudios0@gmail.com
               </a>
-              <span className="hidden sm:block text-brand-cream/30">|</span>
+              <span className="hidden sm:block text-charcoal/30">|</span>
               <a
                 href="tel:+254713464208"
                 className="text-brand-orange hover:text-brand-cream transition-colors duration-300 font-medium"
