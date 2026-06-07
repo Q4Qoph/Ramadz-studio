@@ -1,374 +1,163 @@
-"use client";
+"use client"
 
-import { useRef, useState, useEffect } from "react";
-import {
-  motion,
-  AnimatePresence,
-  useScroll,
-  useMotionValueEvent,
-} from "framer-motion";
-import { ExternalLink, Headphones, Music2, Zap } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import Image from "next/image";
+import { ArrowUpRight, ExternalLink } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import Link from 'next/link'
+import Image from 'next/image'
 
-// ─── Portfolio data ───────────────────────────────────────────────────────────
-
-const initialPortfolioItems = [
+const portfolioItems = [
   {
     id: "romantic-dimension",
+    num: "01",
     title: "Romantic Dimension Podcast",
     category: "Podcast & Content Strategy",
-    description:
-      "A relationship-focused platform designed to strengthen marriages and promote healthy, faith-centered partnerships. We built the complete content ecosystem — episode frameworks, audio editing, short-form repurposing, and thematic storytelling.",
-    stats: [
-      { label: "Podcast Strategy" },
-      { label: "Faith & Relationships" },
-      { label: "Audio Production" },
-      { label: "Short-form Content" },
+    description: "A relationship-focused platform designed to strengthen marriages and promote healthy, faith-centered partnerships. We built the complete content ecosystem — episode frameworks, audio editing, short-form repurposing, and storytelling.",
+    highlights: [
+      "Podcast Strategy",
+      "Faith & Relationships",
+      "Audio Production",
+      "Short-form Content"
     ],
-    Icon: Headphones,
-    accentColor: "#B54808",
     image: "/portfolio-romantic-dimension.png",
   },
   {
     id: "maendeleo-dancers",
+    num: "02",
     title: "Maendeleo Traditional Dancers",
     category: "Branding & Social Media",
-    description:
-      "A cultural preservation group promoting African heritage through traditional dance. We built a storytelling content ecosystem with behind-the-scenes footage, costume education posts, and an event booking funnel.",
-    stats: [
-      { label: "Cultural Branding" },
-      { label: "Social Media" },
-      { label: "Event Promotion" },
-      { label: "Video Content" },
+    description: "A cultural preservation group promoting African heritage through traditional dance. We built a storytelling content ecosystem with behind-the-scenes footage, costume education posts, and an event booking funnel.",
+    highlights: [
+      "Cultural Branding",
+      "Social Media Strategy",
+      "Event Promotion",
+      "Video Storytelling"
     ],
-    Icon: Music2,
-    accentColor: "#4A4939",
     image: "/portfolio-maendeleo-dancers.png",
   },
   {
     id: "community-bf",
+    num: "03",
     title: "Community Bible Study Fellowship",
     category: "Brand Identity & Social",
-    description:
-      "A digital media brand targeting young entrepreneurs and creatives. We built a full multi-platform presence across Instagram, TikTok, and LinkedIn — focused on business education content, reel production, and community growth.",
-    stats: [
-      { label: "Brand Identity" },
-      { label: "Multi-Platform" },
-      { label: "Reel Production" },
-      { label: "Growth Strategy" },
+    description: "A digital media brand targeting young entrepreneurs and creatives. We built a full multi-platform presence across Instagram, TikTok, and LinkedIn — focused on business education content, reel production, and community growth.",
+    highlights: [
+      "Brand Identity Design",
+      "Multi-Platform Strategy",
+      "Reel Production",
+      "Growth Strategy"
     ],
-    Icon: Zap,
-    accentColor: "#1E3A5F",
     image: "/portfolio-community-bf.png",
-  },
-];
-
-// ─── Stack geometry ───────────────────────────────────────────────────────────
-//
-// Card anchor: 420 × 500 px.
-//
-// STACKED (image 1 reference):
-//   Front card fills anchor at x=0.
-//   Middle peeks ~130 px from left of front (31 %).
-//   Back peeks ~90 px from left of middle (21 %).
-//   Behind cards lift slightly upward (negative y) giving the fan depth.
-//
-// ROW (image 2 reference):
-//   As section exits, cards spread into a flat side-by-side row.
-//   Step = 420 + 10 = 430 px between card left-edges.
-//   All y values normalise to 0, all scales to 1.
-
-const STACKED = [
-  { x: 0, y: 0, scale: 1.0, opacity: 1.0 },
-  { x: -130, y: -18, scale: 0.93, opacity: 0.78 },
-  { x: -220, y: -32, scale: 0.86, opacity: 0.58 },
-];
-
-const ROW = [
-  { x: 430, y: 0, scale: 1.0, opacity: 1.0 },
-  { x: 0, y: 0, scale: 1.0, opacity: 1.0 },
-  { x: -430, y: 0, scale: 1.0, opacity: 1.0 },
-];
-
-function lerp(a: number, b: number, t: number) {
-  return a + (b - a) * t;
-}
-
-function getZIndex(si: number, hovered: boolean) {
-  if (si === 0) return 10;
-  if (hovered) return 9;
-  return 10 - si * 2;
-}
-
-// ─── Component ────────────────────────────────────────────────────────────────
+  }
+]
 
 export default function PortfolioHighlights() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const [items, setItems] = useState(initialPortfolioItems);
-  const [hovered, setHovered] = useState<number | null>(null);
-  const [spread, setSpread] = useState(0);
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const mql = window.matchMedia("(max-width: 767px)");
-    setIsMobile(mql.matches);
-    const handleMedia = (e: MediaQueryListEvent) => {
-      setIsMobile(e.matches);
-    };
-    mql.addEventListener("change", handleMedia);
-    return () => mql.removeEventListener("change", handleMedia);
-  }, []);
-
-  const STACKED_MOBILE = [
-    { x: 0, y: 0, scale: 1.0, opacity: 1.0 },
-    { x: 0, y: -12, scale: 0.94, opacity: 0.85 },
-    { x: 0, y: -24, scale: 0.88, opacity: 0.65 },
-  ];
-
-  const ROW_MOBILE = STACKED_MOBILE;
-
-  // spread: 0 = stacked, 1 = row. Fires as section bottom leaves viewport.
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["end 0.7", "end 0.0"],
-  });
-  useMotionValueEvent(scrollYProgress, "change", (v) =>
-    setSpread(Math.max(0, Math.min(1, v))),
-  );
-
-  const bringForward = (i: number) => {
-    if (i === 0) return;
-    setItems((prev) => {
-      const next = [...prev];
-      const [card] = next.splice(i, 1);
-      next.unshift(card);
-      return next;
-    });
-    setHovered(null);
-  };
-
-  const active = items[0];
-
   return (
-    <section
-      ref={sectionRef}
-      className="py-16 sm:py-24 bg-olive-dark text-white overflow-hidden"
-    >
+    <section className="py-24 bg-olive-dark text-white relative">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header ──────────────────────────────────────────────────────────── */}
-        <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-        >
-          <motion.div
-            className="inline-flex items-center bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 mb-6"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            viewport={{ once: true }}
-          >
-            <span className="text-sm font-medium text-brand-cream">
-              Featured Work
-            </span>
-          </motion.div>
+        
+        {/* Header */}
+        <div className="mb-20">
+          <span className="text-xs font-semibold uppercase tracking-widest text-brand-orange block mb-3">
+            Featured Work
+          </span>
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold text-brand-cream">
+            Real Clients. <span className="text-brand-orange">Real Results.</span>
+          </h2>
+        </div>
 
-          <motion.h2
-            className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold mb-6 text-brand-cream"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            viewport={{ once: true }}
-          >
-            Real Clients.{" "}
-            <span className="text-brand-orange">Real Results.</span>
-          </motion.h2>
+        {/* 
+          CSS Sticky Stack Rows:
+          - Each row has `sticky` position and a solid background.
+          - On scroll, Row 1 sticks. Row 2 slides up, overlapping Row 1, and sticks at its offset. Row 3 overlaps Row 2.
+          - Once all are stacked, they slide up together as the user scrolls to the next section.
+        */}
+        <div className="flex flex-col relative">
+          {portfolioItems.map((item, index) => {
+            // Responsive top offsets:
+            // Desktop: Row 1 sticks at 10rem (160px), Row 2 at 14rem (224px), Row 3 at 18rem (288px)
+            // Mobile: Row 1 sticks at 6rem (96px), Row 2 at 9rem (144px), Row 3 at 12rem (192px)
+            const stickyTopClass = index === 0 
+              ? "sticky top-[6rem] lg:top-[10rem]" 
+              : index === 1 
+                ? "sticky top-[9rem] lg:top-[14rem]" 
+                : "sticky top-[12rem] lg:top-[18rem]"
+            
+            const zIndexClass = index === 0 ? "z-10" : index === 1 ? "z-20" : "z-30"
 
-          <motion.p
-            className="text-lg text-brand-cream/70 max-w-3xl mx-auto"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            viewport={{ once: true }}
-          >
-            From faith-based platforms to cultural storytelling, discover how
-            we&apos;ve helped our clients build authority and convert attention
-            into meaningful outcomes.
-          </motion.p>
-        </motion.div>
-
-        {/* Cards + info panel ────────────────────────────────────────────── */}
-        <div className="flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-16">
-          {/*
-            Card stack — 420 × 500 px anchor.
-            Behind cards extend LEFT (negative x) and lift UP (negative y).
-            Section overflow:hidden clips at viewport edge — harmless on desktop.
-          */}
-          <div
-            className="relative flex-shrink-0"
-            style={{ width: isMobile ? 280 : 420, height: isMobile ? 340 : 500 }}
-          >
-            {[...items].reverse().map((item, ri) => {
-              const si = items.length - 1 - ri; // 0 = front
-              const isActive = si === 0;
-              const isHovered = hovered === si;
-
-              const s = isMobile
-                ? STACKED_MOBILE[Math.min(si, STACKED_MOBILE.length - 1)]
-                : STACKED[Math.min(si, STACKED.length - 1)];
-              const r = isMobile
-                ? ROW_MOBILE[Math.min(si, ROW_MOBILE.length - 1)]
-                : ROW[Math.min(si, ROW.length - 1)];
-
-              // Hover nudge: shift toward viewer (less negative x, slightly less lift)
-              const bx = isHovered && !isActive ? s.x + (isMobile ? 0 : 22) : s.x;
-              const by = isHovered && !isActive ? s.y + (isMobile ? 4 : 6) : s.y;
-              const bo =
-                isHovered && !isActive
-                  ? Math.min(s.opacity + 0.22, 1)
-                  : s.opacity;
-
-              return (
-                <motion.div
-                  key={item.id}
-                  className="absolute inset-0 rounded-2xl shadow-2xl overflow-hidden bg-olive-mid"
-                  style={{
-                    zIndex: getZIndex(si, isHovered),
-                    cursor: isActive ? "default" : "pointer",
-                  }}
-                  animate={{
-                    x: lerp(bx, r.x, spread),
-                    y: lerp(by, r.y, spread),
-                    scale: lerp(s.scale, r.scale, spread),
-                    opacity: lerp(bo, r.opacity, spread),
-                  }}
-                  transition={{ type: "spring", stiffness: 300, damping: 35 }}
-                  onClick={() => bringForward(si)}
-                  onMouseEnter={() => !isActive && setHovered(si)}
-                  onMouseLeave={() => setHovered(null)}
-                >
-                  {/* Full card background image */}
+            return (
+              <div
+                key={item.id}
+                className={`w-full bg-olive-dark border-t border-white/15 pt-10 pb-16 lg:pb-24 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start ${stickyTopClass} ${zIndexClass}`}
+              >
+                {/* Column 1: Image (col-span-3) */}
+                <div className="col-span-1 lg:col-span-3 relative aspect-[4/3] lg:aspect-[2/2.3] w-full rounded-2xl overflow-hidden shadow-2xl bg-olive-mid group">
                   <Image
                     src={item.image}
-                    alt=""
+                    alt={item.title}
                     fill
-                    sizes="420px"
-                    className="object-cover "
-                    priority={si === 0} // load front image first
+                    sizes="(max-width: 1024px) 100vw, 25vw"
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    priority={index === 0}
                   />
-
-                  {/* Dark overlay for readability */}
-                  <div className="absolute inset-0 bg-black/50 rounded-2xl" />
-
-                  {/* Text content on top */}
-                  <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6">
-                    <p className="text-white font-semibold text-xl drop-shadow-md">
-                      {item.title}
-                    </p>
-                    <p className="text-white/70 text-sm mt-2 drop-shadow">
-                      {item.category}
-                    </p>
-
-                    {!isActive && isHovered && spread < 0.25 && (
-                      <motion.p
-                        className="text-brand-orange text-xs mt-4 font-medium"
-                        initial={{ opacity: 0, y: 4 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.18 }}
-                      >
-                        Click to bring forward
-                      </motion.p>
-                    )}
-                  </div>
-                </motion.div>
-              );
-            })}
-          </div>
-
-          {/* Info panel ────────────────────────────────────────────────────── */}
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={active.id}
-              className="w-full max-w-sm lg:w-64 flex-shrink-0"
-              initial={{ opacity: 0, x: 24 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -16 }}
-              transition={{ duration: 0.38 }}
-            >
-              <div className="bg-olive-mid/60 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
-                <span className="inline-block bg-brand-orange text-white text-xs px-3 py-1 rounded-full mb-4">
-                  {active.category}
-                </span>
-
-                <h3 className="text-brand-cream font-serif font-bold text-xl mb-3 leading-snug">
-                  {active.title}
-                </h3>
-
-                <p className="text-brand-cream/70 text-sm leading-relaxed mb-5">
-                  {active.description}
-                </p>
-
-                <p className="text-brand-cream/40 text-[11px] uppercase tracking-widest mb-3">
-                  Highlights
-                </p>
-
-                <div className="flex flex-wrap gap-2 mb-5">
-                  {active.stats.map((s) => (
-                    <span
-                      key={s.label}
-                      className="bg-white/10 text-brand-cream text-xs px-3 py-1.5 rounded-full"
-                    >
-                      {s.label}
-                    </span>
-                  ))}
+                  <div className="absolute inset-0 bg-black/15 group-hover:bg-black/0 transition-colors duration-300" />
                 </div>
 
-                <Button
-                  size="sm"
-                  className="w-full bg-brand-orange hover:bg-brand-orange/90 text-white"
-                  asChild
-                >
-                  <Link href="/portfolio">
-                    View Case Study
-                    <ExternalLink className="ml-2 h-3.5 w-3.5" />
-                  </Link>
-                </Button>
+                {/* Column 2: Number (col-span-1) */}
+                <div className="col-span-1 lg:col-span-1 text-3xl lg:text-4xl font-bold text-brand-orange font-mono">
+                  {item.num}
+                </div>
+
+                {/* Column 3: Title & Category (col-span-4) */}
+                <div className="col-span-1 lg:col-span-4 flex flex-col gap-3 pt-1">
+                  <h3 className="text-2xl sm:text-3xl font-serif font-bold text-brand-cream leading-snug">
+                    {item.title}
+                  </h3>
+                  <span className="text-sm font-semibold tracking-wider uppercase text-brand-cream/60">
+                    {item.category}
+                  </span>
+                  <p className="text-sm sm:text-base text-brand-cream/75 leading-relaxed mt-2 hidden sm:block">
+                    {item.description}
+                  </p>
+                </div>
+
+                {/* Column 4: Highlights & CTA (col-span-4) */}
+                <div className="col-span-1 lg:col-span-4 flex flex-col justify-between h-full min-h-[140px] pt-1">
+                  <div>
+                    <span className="text-xs uppercase tracking-widest text-brand-orange font-semibold block mb-3">
+                      Highlights
+                    </span>
+                    <div className="flex flex-wrap gap-2 mb-6">
+                      {item.highlights.map((h) => (
+                        <span
+                          key={h}
+                          className="bg-white/5 border border-white/10 text-brand-cream/90 text-xs px-3 py-1.5 rounded-full"
+                        >
+                          {h}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  <Button
+                    className="w-fit bg-brand-orange hover:bg-brand-orange/90 text-white rounded-full px-6 py-5"
+                    asChild
+                  >
+                    <Link href={`/portfolio#${item.id}`} className="inline-flex items-center gap-2">
+                      <span>View Case Study</span>
+                      <ArrowUpRight className="w-4 h-4" />
+                    </Link>
+                  </Button>
+                </div>
               </div>
-            </motion.div>
-          </AnimatePresence>
+            )
+          })}
         </div>
 
-        {/* Navigation dots ─────────────────────────────────────────────────── */}
-        <div className="flex justify-center gap-2 mt-10">
-          {items.map((item, i) => (
-            <button
-              key={item.id}
-              onClick={() => bringForward(i)}
-              className={`h-2 rounded-full transition-all duration-300 ${
-                i === 0
-                  ? "bg-brand-orange w-6"
-                  : "bg-white/30 hover:bg-white/60 w-2"
-              }`}
-              aria-label={`View ${item.title}`}
-            />
-          ))}
-        </div>
-
-        {/* CTA ─────────────────────────────────────────────────────────────── */}
-        <motion.div
-          className="text-center mt-12"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.8 }}
-          viewport={{ once: true }}
-        >
+        {/* CTA */}
+        <div className="text-center mt-16 border-t border-white/10 pt-16">
           <Button
             size="lg"
-            className="bg-brand-orange hover:bg-brand-orange/90 hover:shadow-brand transform hover:-translate-y-1 transition-all duration-300 text-white"
+            className="bg-brand-orange hover:bg-brand-orange/90 hover:shadow-brand transform hover:-translate-y-1 transition-all duration-300 text-white rounded-full px-8 py-6 text-lg"
             asChild
           >
             <Link href="/portfolio">
@@ -376,8 +165,9 @@ export default function PortfolioHighlights() {
               <ExternalLink className="ml-2 h-5 w-5" />
             </Link>
           </Button>
-        </motion.div>
+        </div>
+        
       </div>
     </section>
-  );
+  )
 }
