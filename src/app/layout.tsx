@@ -1,12 +1,12 @@
 import type { Metadata } from 'next'
-import { Inter, Playfair_Display } from 'next/font/google'
+import { Outfit, Playfair_Display } from 'next/font/google'
 import './globals.css'
 import Header from '@/components/layout/header'
 import Footer from '@/components/layout/footer'
 
-const inter = Inter({ 
+const outfit = Outfit({ 
   subsets: ['latin'],
-  variable: '--font-inter'
+  variable: '--font-outfit'
 })
 
 const playfair = Playfair_Display({ 
@@ -39,7 +39,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
+    <html lang="en" className={`${outfit.variable} ${playfair.variable}`}>
       <body className="font-sans antialiased">
         <Header />
         <main className="min-h-screen">

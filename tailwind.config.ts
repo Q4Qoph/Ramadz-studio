@@ -101,7 +101,7 @@ const config: Config = {
       },
       fontFamily: {
         'serif': ['Playfair Display', 'serif'],
-        'sans': ['Inter', 'system-ui', 'sans-serif'],
+        'sans': ['var(--font-outfit)', 'system-ui', 'sans-serif'],
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',

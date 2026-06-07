@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import {
   motion,
   AnimatePresence,
@@ -109,6 +109,25 @@ export default function PortfolioHighlights() {
   const [items, setItems] = useState(initialPortfolioItems);
   const [hovered, setHovered] = useState<number | null>(null);
   const [spread, setSpread] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const mql = window.matchMedia("(max-width: 767px)");
+    setIsMobile(mql.matches);
+    const handleMedia = (e: MediaQueryListEvent) => {
+      setIsMobile(e.matches);
+    };
+    mql.addEventListener("change", handleMedia);
+    return () => mql.removeEventListener("change", handleMedia);
+  }, []);
+
+  const STACKED_MOBILE = [
+    { x: 0, y: 0, scale: 1.0, opacity: 1.0 },
+    { x: 0, y: -12, scale: 0.94, opacity: 0.85 },
+    { x: 0, y: -24, scale: 0.88, opacity: 0.65 },
+  ];
+
+  const ROW_MOBILE = STACKED_MOBILE;
 
   // spread: 0 = stacked, 1 = row. Fires as section bottom leaves viewport.
   const { scrollYProgress } = useScroll({
@@ -191,19 +210,23 @@ export default function PortfolioHighlights() {
           */}
           <div
             className="relative flex-shrink-0"
-            style={{ width: 420, height: 500 }}
+            style={{ width: isMobile ? 280 : 420, height: isMobile ? 340 : 500 }}
           >
             {[...items].reverse().map((item, ri) => {
               const si = items.length - 1 - ri; // 0 = front
               const isActive = si === 0;
               const isHovered = hovered === si;
 
-              const s = STACKED[Math.min(si, STACKED.length - 1)];
-              const r = ROW[Math.min(si, ROW.length - 1)];
+              const s = isMobile
+                ? STACKED_MOBILE[Math.min(si, STACKED_MOBILE.length - 1)]
+                : STACKED[Math.min(si, STACKED.length - 1)];
+              const r = isMobile
+                ? ROW_MOBILE[Math.min(si, ROW_MOBILE.length - 1)]
+                : ROW[Math.min(si, ROW.length - 1)];
 
               // Hover nudge: shift toward viewer (less negative x, slightly less lift)
-              const bx = isHovered && !isActive ? s.x + 22 : s.x;
-              const by = isHovered && !isActive ? s.y + 6 : s.y;
+              const bx = isHovered && !isActive ? s.x + (isMobile ? 0 : 22) : s.x;
+              const by = isHovered && !isActive ? s.y + (isMobile ? 4 : 6) : s.y;
               const bo =
                 isHovered && !isActive
                   ? Math.min(s.opacity + 0.22, 1)

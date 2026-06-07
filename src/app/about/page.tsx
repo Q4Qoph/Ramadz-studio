@@ -102,7 +102,7 @@ const howWeWork = [
 
 export default function AboutPage() {
   return (
-    <div className="pt-20">
+    <div className="pt-24 sm:pt-28">
       {/* Hero Section */}
       <section className="py-16 sm:py-24 bg-olive-dark relative overflow-hidden">
         {/* Decorative circles */}

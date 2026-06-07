@@ -135,14 +135,14 @@ export default function CTASection() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center text-sm">
               <a
                 href="mailto:rmdstudios0@gmail.com"
-                className="text-brand-orange hover:text-brand-cream transition-colors duration-300 font-medium"
+                className="text-brand-orange hover:text-charcoal transition-colors duration-300 font-medium"
               >
                 rmdstudios0@gmail.com
               </a>
               <span className="hidden sm:block text-charcoal/30">|</span>
               <a
                 href="tel:+254713464208"
-                className="text-brand-orange hover:text-brand-cream transition-colors duration-300 font-medium"
+                className="text-brand-orange hover:text-charcoal transition-colors duration-300 font-medium"
               >
                 +254 713 464 208
               </a>

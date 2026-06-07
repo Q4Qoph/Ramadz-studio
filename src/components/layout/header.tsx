@@ -44,7 +44,7 @@ export default function Header() {
       transition={{ duration: 0.6 }}
     >
       <nav className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 sm:h-20">
+        <div className="flex items-center justify-between h-20 sm:h-24">
           {/* Logo */}
           <motion.div
             className="flex-shrink-0"
@@ -52,7 +52,7 @@ export default function Header() {
             whileTap={{ scale: 0.95 }}
           >
             <Link href="/" className="flex items-center">
-              <div className="relative w-24 h-32 sm:w-28 sm:h-32">
+              <div className="relative w-32 h-40 sm:w-36 sm:h-44">
                 <Image
                   src="/logo2.png"
                   alt="RMDZ Studios Logo"
@@ -76,7 +76,7 @@ export default function Header() {
                 >
                   <Link
                     href={item.href}
-                    className="text-brand-cream hover:text-white transition-colors duration-300 font-medium relative group"
+                    className="text-brand-cream hover:text-white transition-colors duration-300 font-medium text-lg xl:text-xl relative group"
                   >
                     {item.name}
                     <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-orange transition-all duration-300 group-hover:w-full"></span>
@@ -131,7 +131,7 @@ export default function Header() {
                   >
                     <Link
                       href={item.href}
-                      className="text-brand-cream hover:text-white hover:bg-olive-mid block px-3 py-2 rounded-md text-base font-medium transition-all duration-300"
+                      className="text-brand-cream hover:text-white hover:bg-olive-mid block px-3 py-2 rounded-md text-xl font-medium transition-all duration-300"
                       onClick={() => setIsOpen(false)}
                     >
                       {item.name}

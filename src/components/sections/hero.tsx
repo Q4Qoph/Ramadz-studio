@@ -32,7 +32,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 sm:pt-24">
       {/* Background image — mobile only */}
       <motion.div
         className="absolute inset-0 block lg:hidden"
@@ -119,11 +119,10 @@ export default function Hero() {
             </motion.div>
           </motion.div>
 
-          {/* Right Column — collage, desktop only */}
-          <div className="relative flex items-center justify-center">
+          {/* Right Column — collage */}
+          <div className="relative flex items-center justify-center w-full">
             <div
-              className="hidden lg:block relative mx-auto"
-              style={{ width: "100%", maxWidth: 480, aspectRatio: "4/5" }}
+              className="relative mx-auto mt-12 lg:mt-0 w-[280px] sm:w-[360px] lg:w-[450px] xl:w-[480px] aspect-[4/5]"
             >
               <AnimatePresence>
                 {!imagesLoaded && (
@@ -184,7 +183,7 @@ export default function Hero() {
                   src="/background1.jpg"
                   alt="Content creation studio"
                   fill
-                  sizes="(max-width: 1024px) 0px, 30vw"
+                  sizes="(max-width: 640px) 180px, (max-width: 1024px) 240px, 30vw"
                   className="object-cover"
                 />
               </motion.div>
@@ -209,7 +208,7 @@ export default function Hero() {
                   src="/background2.jpg"
                   alt="Brand strategy work"
                   fill
-                  sizes="(max-width: 1024px) 0px, 30vw"
+                  sizes="(max-width: 640px) 140px, (max-width: 1024px) 180px, 30vw"
                   className="object-cover"
                 />
               </motion.div>
@@ -234,7 +233,7 @@ export default function Hero() {
                   src="/background3.jpg"
                   alt="Digital growth results"
                   fill
-                  sizes="(max-width: 1024px) 0px, 30vw"
+                  sizes="(max-width: 640px) 180px, (max-width: 1024px) 240px, 30vw"
                   className="object-cover"
                 />
               </motion.div>

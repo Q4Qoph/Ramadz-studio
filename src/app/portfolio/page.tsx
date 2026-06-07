@@ -105,7 +105,7 @@ export default function PortfolioPage() {
     : portfolioItems.filter(item => item.categories.includes(activeCategory))
 
   return (
-    <div className="pt-20">
+    <div className="pt-24 sm:pt-28">
       {/* Hero */}
       <section className="py-16 sm:py-24 bg-olive-dark relative overflow-hidden">
         <div

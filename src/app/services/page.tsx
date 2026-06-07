@@ -129,7 +129,7 @@ export default function ServicesPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null)
 
   return (
-    <div className="pt-20">
+    <div className="pt-24 sm:pt-28">
       {/* Hero */}
       <section className="py-16 sm:py-24 bg-olive-dark relative overflow-hidden">
         <div
