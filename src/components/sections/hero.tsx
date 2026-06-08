@@ -133,7 +133,7 @@ export default function Hero() {
                     transition={{ duration: 0.5 }}
                   >
                     <div
-                      className="absolute animate-pulse bg-olive-mid rounded-2xl"
+                      className="absolute animate-pulse bg-olive-mid rounded-none"
                       style={{
                         width: "62%",
                         aspectRatio: "3/4",
@@ -142,7 +142,7 @@ export default function Hero() {
                       }}
                     />
                     <div
-                      className="absolute animate-pulse bg-olive-mid rounded-2xl"
+                      className="absolute animate-pulse bg-olive-mid rounded-none"
                       style={{
                         width: "48%",
                         aspectRatio: "1/1",
@@ -151,7 +151,7 @@ export default function Hero() {
                       }}
                     />
                     <div
-                      className="absolute animate-pulse bg-olive-mid rounded-2xl"
+                      className="absolute animate-pulse bg-olive-mid rounded-none"
                       style={{
                         width: "60%",
                         aspectRatio: "4/3",
@@ -164,7 +164,7 @@ export default function Hero() {
               </AnimatePresence>
 
               <motion.div
-                className="absolute rounded-2xl overflow-hidden shadow-2xl"
+                className="absolute rounded-none overflow-hidden shadow-2xl"
                 style={{
                   width: "62%",
                   aspectRatio: "3/4",
@@ -189,7 +189,7 @@ export default function Hero() {
               </motion.div>
 
               <motion.div
-                className="absolute rounded-2xl overflow-hidden shadow-2xl"
+                className="absolute rounded-none overflow-hidden shadow-2xl"
                 style={{
                   width: "48%",
                   aspectRatio: "1/1",
@@ -214,7 +214,7 @@ export default function Hero() {
               </motion.div>
 
               <motion.div
-                className="absolute rounded-2xl overflow-hidden shadow-2xl"
+                className="absolute rounded-none overflow-hidden shadow-2xl"
                 style={{
                   width: "60%",
                   aspectRatio: "4/3",

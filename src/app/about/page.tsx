@@ -417,12 +417,12 @@ export default function AboutPage() {
               >
                 <div className="relative w-32 h-32 mx-auto mb-5">
                   {/* Circular image with orange border */}
-                  <div className="w-32 h-32 rounded-full border-4 border-brand-orange overflow-hidden bg-olive-mid flex items-center justify-center">
+                  <div className="w-32 h-32 rounded-none border-4 border-brand-orange overflow-hidden bg-olive-mid flex items-center justify-center">
                     <Image
                       src={member.photo}
                       alt={member.name}
                       fill
-                      className="object-cover rounded-full object-top"
+                      className="object-cover rounded-none object-top"
                       onError={() => {}}
                     />
                     

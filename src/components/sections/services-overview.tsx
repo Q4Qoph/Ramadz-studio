@@ -23,7 +23,7 @@ const services = [
   },
   {
     slug: "brand-identity",
-    image: "/background1.jpg",
+    image: "/service-brand-identity.jpeg",
     title: "Brand Identity Development",
     description: "Visibility without clarity is chaos. We articulate your mission, develop your visual language, and document a comprehensive brand guide.",
   },
@@ -58,7 +58,7 @@ function ServiceCard({
       className="absolute lg:relative w-full max-w-sm sm:max-w-md lg:max-w-none h-full"
     >
       <Link href={`/services#${service.slug}`} aria-label={`Learn more about ${service.title}`} className="block h-full">
-        <Card className="h-full group hover:shadow-xl transition-all duration-500 border-0 bg-white relative overflow-hidden">
+        <Card className="h-full group hover:shadow-xl transition-all duration-500 border-0 bg-white relative overflow-hidden rounded-none">
           {/* Diagonal arrow — top-right */}
           <ArrowUpRight className="absolute top-4 right-4 z-10 w-5 h-5 text-charcoal/40 group-hover:text-brand-orange transition-colors duration-300" />
 

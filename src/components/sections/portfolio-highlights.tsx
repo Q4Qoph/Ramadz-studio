@@ -18,21 +18,21 @@ const portfolioItems = [
       "Audio Production",
       "Short-form Content"
     ],
-    image: "/portfolio-romantic-dimension.png",
+    image: "/portfolio-romantic-dimension.jpg",
   },
   {
-    id: "maendeleo-dancers",
+    id: "glammed-beauty",
     num: "02",
-    title: "Maendeleo Traditional Dancers",
-    category: "Branding & Social Media",
-    description: "A cultural preservation group promoting African heritage through traditional dance. We built a storytelling content ecosystem with behind-the-scenes footage, costume education posts, and an event booking funnel.",
+    title: "Glammed Beauty Hub",
+    category: "Social Media & Content Strategy",
+    description: "A beauty and wellness brand specializing in professional salon services, nail care, and customer-focused experiences. We built content marketing strategies that showcase service transformations, highlight customer stories, and drive loyal client retention.",
     highlights: [
-      "Cultural Branding",
-      "Social Media Strategy",
-      "Event Promotion",
-      "Video Storytelling"
+      "Social Media Management",
+      "Content Marketing",
+      "Customer Experience",
+      "Brand Positioning"
     ],
-    image: "/portfolio-maendeleo-dancers.png",
+    image: "/portfolio-glammed-beauty.jpeg",
   },
   {
     id: "community-bf",
@@ -46,7 +46,7 @@ const portfolioItems = [
       "Reel Production",
       "Growth Strategy"
     ],
-    image: "/portfolio-community-bf.png",
+    image: "/portfolio-community-bf.jpg",
   }
 ]
 
@@ -89,64 +89,68 @@ export default function PortfolioHighlights() {
                 key={item.id}
                 className={`w-full bg-olive-dark border-t border-white/15 pt-10 pb-16 lg:pb-24 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start ${stickyTopClass} ${zIndexClass}`}
               >
-                {/* Column 1: Image (col-span-3) */}
-                <div className="col-span-1 lg:col-span-3 relative aspect-[4/3] lg:aspect-[2/2.3] w-full rounded-2xl overflow-hidden shadow-2xl bg-olive-mid group">
+                {/* Column 1: Image (col-span-7) */}
+                <div className="col-span-1 lg:col-span-7 relative aspect-[16/9] w-full rounded-none overflow-hidden shadow-2xl bg-olive-mid group">
                   <Image
                     src={item.image}
                     alt={item.title}
                     fill
-                    sizes="(max-width: 1024px) 100vw, 25vw"
+                    sizes="(max-width: 1024px) 100vw, 60vw"
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
                     priority={index === 0}
                   />
                   <div className="absolute inset-0 bg-black/15 group-hover:bg-black/0 transition-colors duration-300" />
                 </div>
 
-                {/* Column 2: Number (col-span-1) */}
-                <div className="col-span-1 lg:col-span-1 text-3xl lg:text-4xl font-bold text-brand-orange font-mono">
-                  {item.num}
-                </div>
-
-                {/* Column 3: Title & Category (col-span-4) */}
-                <div className="col-span-1 lg:col-span-4 flex flex-col gap-3 pt-1">
-                  <h3 className="text-2xl sm:text-3xl font-serif font-bold text-brand-cream leading-snug">
-                    {item.title}
-                  </h3>
-                  <span className="text-sm font-semibold tracking-wider uppercase text-brand-cream/60">
-                    {item.category}
-                  </span>
-                  <p className="text-sm sm:text-base text-brand-cream/75 leading-relaxed mt-2 hidden sm:block">
-                    {item.description}
-                  </p>
-                </div>
-
-                {/* Column 4: Highlights & CTA (col-span-4) */}
-                <div className="col-span-1 lg:col-span-4 flex flex-col justify-between h-full min-h-[140px] pt-1">
-                  <div>
-                    <span className="text-xs uppercase tracking-widest text-brand-orange font-semibold block mb-3">
-                      Highlights
-                    </span>
-                    <div className="flex flex-wrap gap-2 mb-6">
-                      {item.highlights.map((h) => (
-                        <span
-                          key={h}
-                          className="bg-white/5 border border-white/10 text-brand-cream/90 text-xs px-3 py-1.5 rounded-full"
-                        >
-                          {h}
-                        </span>
-                      ))}
-                    </div>
+                {/* Column 2: Content (col-span-5) */}
+                <div className="col-span-1 lg:col-span-5 flex flex-col sm:flex-row gap-6 lg:gap-8 pt-1">
+                  {/* Number */}
+                  <div className="text-3xl lg:text-4xl font-bold text-brand-orange font-mono sm:w-12 flex-shrink-0">
+                    {item.num}
                   </div>
 
-                  <Button
-                    className="w-fit bg-brand-orange hover:bg-brand-orange/90 text-white rounded-full px-6 py-5"
-                    asChild
-                  >
-                    <Link href={`/portfolio#${item.id}`} className="inline-flex items-center gap-2">
-                      <span>View Case Study</span>
-                      <ArrowUpRight className="w-4 h-4" />
-                    </Link>
-                  </Button>
+                  {/* Details */}
+                  <div className="flex flex-col gap-6 flex-grow">
+                    <div className="flex flex-col gap-3">
+                      <h3 className="text-2xl sm:text-3xl font-serif font-bold text-brand-cream leading-snug">
+                        {item.title}
+                      </h3>
+                      <span className="text-sm font-semibold tracking-wider uppercase text-brand-cream/60">
+                        {item.category}
+                      </span>
+                      <p className="text-sm sm:text-base text-brand-cream/75 leading-relaxed mt-2 hidden sm:block">
+                        {item.description}
+                      </p>
+                    </div>
+
+                    <div>
+                      <span className="text-xs uppercase tracking-widest text-brand-orange font-semibold block mb-3">
+                        Highlights
+                      </span>
+                      <div className="flex flex-wrap gap-2">
+                        {item.highlights.map((h) => (
+                          <span
+                            key={h}
+                            className="bg-white/5 border border-white/10 text-brand-cream/90 text-xs px-3 py-1.5 rounded-full"
+                          >
+                            {h}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="pt-2">
+                      <Button
+                        className="w-fit bg-brand-orange hover:bg-brand-orange/90 text-white rounded-full px-6 py-5"
+                        asChild
+                      >
+                        <Link href={`/portfolio#${item.id}`} className="inline-flex items-center gap-2">
+                          <span>View Case Study</span>
+                          <ArrowUpRight className="w-4 h-4" />
+                        </Link>
+                      </Button>
+                    </div>
+                  </div>
                 </div>
               </div>
             )

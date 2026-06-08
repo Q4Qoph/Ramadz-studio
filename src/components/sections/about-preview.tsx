@@ -30,7 +30,7 @@ export default function AboutPreview() {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="rounded-sm overflow-hidden shadow-xl relative w-full aspect-[16/10]"
+            className="rounded-none overflow-hidden shadow-xl relative w-full aspect-[16/10]"
           >
             <Image
               src="/background2.jpg"
